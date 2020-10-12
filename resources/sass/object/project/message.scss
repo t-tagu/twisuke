@@ -1,0 +1,30 @@
+.p-message {
+  &__cover {
+    position: fixed;
+    left: calc(50vw - #{$flash-message_width}/2);
+    text-align:  center;
+    width: $flash-message_width;
+    height: 50px;
+    line-height: 50px;
+    font-size: $font-size_m;
+    background: #c6c6c6;
+    color: $color_white;
+    z-index: 20;
+    box-sizing: border-box;
+    border-radius: $common_box_radius;
+    &--hide { //隠す
+      top: (-$space_large_m);
+      /*transitionで変化させる属性や変化速度、変化の仕方を記載(消す時)*/
+      transition-property: top;
+      transition-duration: 0.6s;
+      transition-timing-function: ease-in-out;
+    }
+    &--show { //表示
+      top: $space_m;
+      /*transitionで変化させる属性や変化速度、変化の仕方を記載(表示させる時)*/
+      transition-property: top;
+      transition-duration: 0.6s;
+      transition-timing-function: ease-in-out;
+    }
+  }
+}

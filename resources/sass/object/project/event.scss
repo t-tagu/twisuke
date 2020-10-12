@@ -1,0 +1,80 @@
+.p-event {
+  &__subtitle {
+    font-size: $font-size_2l;
+    margin: $space_xs 0 $space_m;
+    @include member-mq('sm'){
+      font-size: $font-size_l;
+    }
+    @include member-mq('xxs'){
+      font-size: $font-size_m;
+    }
+  }
+  &__subcontainer {
+    padding-top: $space_large_xs;
+  }
+  &__comment {
+    width: 100%;
+    padding: $space_xxs $space_xxs;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+    resize: none;
+    outline: none;
+    font-size: $font-size_m;
+    box-sizing: border-box;
+  }
+  &__secretary-content {
+    display: flex;
+    align-items: center;
+  }
+  &__icon-box {
+    width: $icon-size;
+    height: $icon-size;
+    min-width: $icon-size;
+  }
+  &__icon {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+  &__secretary-name {
+    margin-left: 8px;
+    line-height: 1.4;
+    flex: 1;
+    word-break: break-all;
+  }
+  &__button {
+    margin: $space_large_m auto 0;
+    color: $color_white;
+    width: $form_button_width;
+    height: $form_parts_height;
+    border-radius: $form_parts_height/2;
+    font-size: $font-size_m;
+    background: $main_color;
+    display: block;
+    border: none;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__table-area {
+    overflow: auto; //tableをスクロールさせる
+    white-space: nowrap; //文字の折り返しを禁止
+  }
+  &__table {
+    table-layout: fixed;
+    min-width: 100%;
+  }
+  &__table-title {
+    text-align: left;
+    border: 1px solid #e6e6e6;
+    padding: $space_xs;
+  }
+  &__table-data {
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    width: 120px;
+    min-width: 120px;
+    padding: $space_xs;
+  }
+}

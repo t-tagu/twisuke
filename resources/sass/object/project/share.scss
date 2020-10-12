@@ -1,0 +1,103 @@
+.p-share {
+  &__subtitle {
+    font-size: $font-size_2l;
+    margin: $space_xs 0 $space_m;
+    @include member-mq('sm'){
+      font-size: $font-size_l;
+    }
+    @include member-mq('xxs'){
+      font-size: $font-size_m;
+    }
+  }
+  &__subtitle-attension {
+    font-size: 11px;
+    margin-left: $space_xs;
+    @include member-mq('xxs'){
+      display: block;
+      font-size: 10px;
+      margin: $space_xxs 0 0 0;
+    }
+  }
+  &__subcontainer {
+    padding-top: $space_large_xs;
+  }
+  &__url-container {
+    display: flex;
+  }
+  &__url {
+    border: 1px solid $main_border_color;
+    border-radius: $common_box_radius;
+    height: $form_parts_height;
+    line-height: $form_parts_height;
+    padding-left: $space_xxs;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: $font-size_m;
+    width: 95%;
+    margin-right: $space_xs;
+  }
+  &__copy-button {
+    width: $form_parts_height;
+    min-width: $form_parts_height;
+    border-radius: $form_parts_height/2;
+    border: none;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__copy-icon {
+    font-size: $font-size_2l;
+  }
+  &__button {
+    margin: $space_large_m auto 0;
+    color: $color_white;
+    width: $form_button_width;
+    height: $form_parts_height;
+    border-radius: $form_parts_height/2;
+    font-size: $font-size_m;
+    background: $main_color;
+    display: block;
+    border: none;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__select-content {
+    display: flex;
+  }
+  &__icon-box {
+    width: $icon_size;
+    min-width: $icon_size;
+    height: $icon_size;
+  }
+  &__icon {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+  &__account-name {
+    margin-left: $space_xxs;
+    line-height: $icon_size;
+  }
+  &__tweet-area {
+    width: 100%;
+    padding-top: $space_xxl;
+  }
+  &__textarea {
+    width: 100%;
+    padding: $space_xxs $space_xs;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid $main_border_color;
+    resize: none;
+    outline: none;
+    font-size: $font-size_m;
+    box-sizing: border-box;
+  }
+  &__tweet-count-box {
+    display: flex;
+    justify-content: flex-end;
+    padding: $space_m 0 0 $space_large_m;
+  }
+}

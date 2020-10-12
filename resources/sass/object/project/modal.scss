@@ -1,0 +1,93 @@
+.p-modal {
+  &__mask {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0 ,0 ,0 ,0.5);
+    display: table;
+    transition: opacity .3s ease;
+  }
+  &__wrapper {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    overflow-y: scroll;
+  }
+  &__container {
+    position: absolute;
+    width: 580px;
+    top: $space_xl;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color_white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all .3s ease;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    padding: $space_m;
+    font-size: $font-size_l;
+    font-weight: $font_weight_xs;
+  }
+  &__content {
+    padding: 0 $space_xl;
+  }
+  &__cancel {
+    margin: $space_m $space_xs 0 0;
+    background: transparent;
+    border: none;
+    font-size: $font-size_m;
+    color: $main_border_color;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__cross-icon {
+    pointer-events: none;
+  }
+  &__button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: $space_m $space_xl;
+  }
+  &__button {
+    font-size: $font-size_xxs;
+    border-radius: $mini_btn_height/2;
+    height: $mini_btn_height;
+    padding: 0 $space_xs;
+    border: 1px solid $main_color;
+    color: $main_color;
+    background: $color_white;
+    outline: none;
+  }
+  &__follower-list-item {
+    display: flex;
+    box-sizing: border-box;
+    padding: $space_xxs 0;
+    border-top: 1px solid $main_border_color;
+    border-bottom: 1px solid $main_border_color;
+  }
+  &__select-content {
+    display: flex;
+  }
+  &__icon-box {
+    width: $icon_size;
+    height: $icon_size;
+  }
+  &__icon {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+  &__name {
+    margin-left: $space_xxs;
+    line-height: $icon_size;
+  }
+}

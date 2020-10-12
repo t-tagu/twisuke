@@ -1,0 +1,29 @@
+.p-content {
+  position: relative;
+  padding-top: $header_height;
+  margin-left: $sidebar_width;
+  @include member-mq('md'){
+    margin-left: 0;
+  }
+  box-sizing: border-box;
+  background: $color_white;
+  &__inner {
+    padding: $space_l $space_l $space_large_xs;
+    @include member-mq('sm'){
+      padding: $space_l $space_s $space_large_xs;
+      font-size: $font-size_s;
+    }
+    @include member-mq('xxs'){
+      padding: $space_l $space_xs $space_large_xs;
+      font-size: $font-size_xs;
+    }
+  }
+  &__title-box {
+    border-bottom: 1px solid $main_border_color;
+    padding: $space_l 0 $space_s;
+  }
+  &__title {
+    font-size: $font-size_3l;
+    font-weight: bold;
+  }
+}

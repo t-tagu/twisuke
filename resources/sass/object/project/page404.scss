@@ -1,0 +1,42 @@
+.p-page404 {
+  &__container {
+    padding: 0 $space_xs;
+  }
+  &__inner {
+    max-width: 380px;
+    border-radius: 10px;
+    background: $color_white;
+    margin: 7% auto 30px;
+    box-sizing: border-box;
+    padding: $space_m;
+  }
+  &__title {
+    text-align: center;
+    margin-bottom: $space_s;
+    &--main {
+      font-weight: bold;
+      font-size: 64px;
+      letter-spacing: 0;
+    }
+    &--sub {
+      display: inline-block;
+      font-size: 32px;
+      color: #aaa;
+      letter-spacing: 0;
+    }
+  }
+  &__warning {
+    font-size: $font-size_l;
+    line-height: 1.4;
+    margin-bottom: $space_s;
+  }
+  &__link-box {
+    text-align: center;
+  }
+  &__link {
+    color: $link_color;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,104 @@
+.p-schedule {
+  &__subtitle {
+    font-size: $font-size_2l;
+    margin: $space_xs 0 $space_m;
+    @include member-mq('sm'){
+      font-size: $font-size_l;
+    }
+    @include member-mq('xxs'){
+      font-size: $font-size_m;
+    }
+  }
+  &__subcontainer {
+    padding-top: $space_large_xs;
+  }
+  &__name {
+    border: 1px solid $main_border_color;
+    border-radius: $common_box_radius;
+    height: $form_parts_height;
+    padding-left: $space_xxs;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: $font-size_m;
+    width: 100%;
+  }
+  &__about-comment {
+    width: 100%;
+    padding: $space_xxs $space_xxs;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+    resize: none;
+    outline: none;
+    font-size: $font-size_m;
+    box-sizing: border-box;
+  }
+  &__format {
+    line-height: 1.5;
+    font-size: $font-size_xs;
+    margin-bottom: $space_m;
+  }
+  &__calendar-area {
+    display: flex;
+    flex-direction: row;
+    @include member-mq('sm'){
+      display: block;
+    }
+  }
+  &__candidate-container {
+    margin-right: $space_large_xs;
+    width: 100%;
+    @include member-mq('sm'){
+      display: flex;
+      align-items: center;
+      margin-right: 0;
+    }
+  }
+  &__candidate-schedule {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e6e6e6;
+    resize: none;
+    outline: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding: 5px 5px;
+    border-radius: 5px;
+    @include member-mq('sm'){
+      margin-right: $space_xs;
+      height: 125px;
+    }
+  }
+  &__calendar-btn {
+    display: none;
+    @include member-mq('sm'){
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      min-width: 45px;
+      border-radius: 22.5px;
+      border: none;
+      outline: none;
+    }
+  }
+  &__calendar {
+    @include member-mq('sm'){
+      margin-top: $space_m;
+    }
+  }
+  &__button {
+    margin: $space_large_m auto 0;
+    color: $color_white;
+    width: $form_button_width;
+    height: $form_parts_height;
+    border-radius: $form_parts_height/2;
+    font-size: $font-size_m;
+    background: $main_color;
+    display: block;
+    border: none;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

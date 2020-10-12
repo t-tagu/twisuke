@@ -1,0 +1,24 @@
+html,body {
+  width: 100%;
+  color: $font-color_default;
+  font-size: $font-size_m;
+  text-size-adjust: 100%;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  font-family:'Noto Sans Japanese', -apple-system, "Droid Sans", "Roboto", "ヒラギノ角ゴ ProN W3",
+  "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, HelveticaNeue, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: $font-color_default;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}

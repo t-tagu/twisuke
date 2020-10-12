@@ -1,0 +1,16 @@
+.p-footer {
+  background: #333333;
+  height: $footer_height;
+  color: $color_white;
+  margin-left: $sidebar_width;
+  margin-top: auto;
+  @include member-mq('md'){
+    margin-left: 0;
+  }
+  @include member-mq('xxs'){
+    font-size: $font-size_s;
+  }
+  @include member-mq('xxxs'){
+    font-size: $font-size_xxs;
+  }
+}

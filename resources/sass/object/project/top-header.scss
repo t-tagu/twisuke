@@ -1,0 +1,30 @@
+.p-top-header {
+  width: 100%;
+  color: #777;
+  position: fixed;
+  transition: 0.4s;
+  z-index: 2;
+  &--sticky {
+    background: rgba(102,213,255,0.8);
+  }
+  &__content {
+    margin: 0 auto;
+    padding: 0 $space_m 0 $space_xs;
+    height: $top-header_height;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include top-mq('md'){
+      height: 60px;
+    }
+  }
+  &__title {
+    font-size: $font-size_ls;
+    font-weight: $font_weight_s;
+    color: $color_white;
+    @include top-mq('md'){
+      font-size: 32px;
+    }
+  }
+}

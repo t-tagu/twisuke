@@ -1,0 +1,57 @@
+.p-form {
+  &__title {
+    padding: $space_large_xs 0 $space_large_xs;
+    text-align: center;
+  }
+  &__toplink {
+    font-size: 36px; //TODO:仮入れ
+  }
+  &__subtitle {
+    font-weight: $font_weight_s;
+    font-size: $font-size_m;
+    text-align: center;
+    margin: 0 0 $space_m;
+  }
+  &__btn {
+    height: $entrance-btn-size;
+    line-height: $entrance-btn-size;
+    font-size: $font-size_m;
+    border: none;
+    border-radius: $entrance-btn-size/2;
+    color: $color_white;
+    background: $main_color;
+    padding: 0 $space_large_xs;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  &__icon {
+    color: $color_white;
+    font-size: $font-size_m;
+    display: inline-block;
+    margin-right: 2px;
+  }
+  &__linkbox {
+    text-align: center;
+    margin-top: $space_large_xs;
+    border-top: 1px solid #c6c6c6;
+  }
+  &__link {
+    font-size: $font-size_s;
+    color: $main_color;
+    display: block;
+    padding: $space_s 0;
+    cursor: pointer;
+    &--center {
+      text-align: center;
+    }
+  }
+  &__box {
+    text-align: center;
+  }
+  &__label {
+    font-weight: $font_weight_mini;
+    color: $attension_color;
+    font-size: $font-size_s;
+  }
+}

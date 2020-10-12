@@ -1,0 +1,32 @@
+//トップ画面用
+$top-breakpoints: (
+  'xxxs': 'screen and (max-width:385px)',
+  'xxs': 'screen and (max-width:500px)',
+  'xs': 'screen and (max-width:580px)',
+  'sm': 'screen and (max-width:650px)',
+  'md': 'screen and (max-width:720px)',
+  'lg': 'screen and (max-width:980px)',
+  'll': 'screen and (max-width:1020px)'
+) !default;
+
+@mixin top-mq($breakpoint: xxxs){
+  @media #{map-get($top-breakpoints, $breakpoint)}{
+    @content;
+  }
+}
+
+//メンバー機能画面用(ログイン後画面)
+$member-breakpoints: (
+  'xxxs': 'screen and (max-width:350px)',
+  'xxs': 'screen and (max-width:450px)',
+  'xs': 'screen and (max-width:550px)',
+  'sm': 'screen and (max-width:600px)',
+  'md': 'screen and (max-width:980px)',
+  'lg': 'screen and (max-width:1120px)',
+) !default;
+
+@mixin member-mq($breakpoint: xxxs){
+  @media #{map-get($member-breakpoints, $breakpoint)}{
+    @content;
+  }
+}

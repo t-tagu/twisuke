@@ -1,0 +1,13 @@
+.p-container {
+  @include top-mq('md'){
+    padding: 0 $space_xs;
+  }
+  &__inner {
+    max-width: 380px;
+    border-radius: 10px;
+    background: $color_white;
+    margin: 7% auto 30px;
+    box-sizing: border-box;
+    padding: 0 $space_m;
+  }
+}

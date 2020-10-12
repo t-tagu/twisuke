@@ -1,0 +1,137 @@
+.p-accordion {
+  background: $color_white;
+  border-bottom: 1px solid #c6c6c6;
+  &__trigger {
+    background: $color_white;
+    position: relative;
+    display: block;
+    width: 100%;
+    transition: all 0.2s ease-in;
+    display: block;
+    font-size: 20px;
+    text-align: left;
+    padding: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:after {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+      content: "";
+      border-top-color: #5f6569;
+      border-width: 7px;
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      margin-top: -5px;
+      transition: all 0.2s ease-in;
+    }
+    &.state-open {
+      background: #f1f1f1;
+      text-decoration: none;
+      &:after {
+        transform:rotateX(180deg);
+        margin-top: -10px;
+      }
+    }
+    &:hover {
+      background: #f1f1f1;
+      text-decoration: none;
+    }
+  }
+  &__target {
+    overflow: hidden;
+    transition: height 0.4s ease-in-out;
+  }
+  &__body {
+    padding: $space_m;
+    @include member-mq('md'){
+      padding: $space_s;
+    }
+    @include member-mq('sm'){
+      padding: $space_xs;
+    }
+  }
+  &-enter-active {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: accordion--anime__opened;
+  }
+  &-leave-active {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: accordion--anime__closed;
+  }
+  &__subcontainer {
+    padding-top: $space_large_xs;
+    &:first-of-type {
+      padding-top: 0;
+    }
+  }
+  &__subtitle {
+    font-size: $font-size_2l;
+    margin: $space_xs 0 $space_s;
+    @include member-mq('sm'){
+      font-size: $font-size_l;
+    }
+    @include member-mq('xxs'){
+      font-size: $font-size_m;
+    }
+  }
+  &__about-comment {
+    width: 100%;
+    margin: 0 auto;
+    font-size: $font-size_m;
+  }
+  &__schedule-container {
+    padding-top: $space_large_xs;
+  }
+  &__table-area {
+    overflow: auto; //tableをスクロールさせる
+    white-space: nowrap; //文字の折り返しを禁止
+  }
+  &__table {
+    table-layout: fixed;
+    min-width: 100%;
+  }
+  &__table-title {
+    text-align: left;
+    border: 1px solid #e6e6e6;
+    padding: $space_xs;
+  }
+  &__table-data {
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    width: 120px;
+    min-width: 120px;
+    padding: $space_xs;
+  }
+  &__url {
+    margin: $space_s 0 $space_l;
+    word-break: break-all;
+    line-height: 1.4;
+  }
+  &__mail-icon {
+    line-height: $form_parts_height;
+    color: $color_white;
+  }
+}
+
+@keyframes accordion--anime__opened {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes accordion--anime__closed {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

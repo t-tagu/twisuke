@@ -1,0 +1,43 @@
+.p-sidebar {
+  position: fixed;
+  margin-top: $header_height;
+  left: 0;
+  background: $sidebar_bg_color;
+  @include member-mq('md'){
+    display: none;
+  }
+  &__content {
+    height: calc(100vh - #{$header_height});
+    width: $sidebar_width;
+    @include member-mq('md'){
+      width: 0;
+    }
+    background: #f9fafc;
+  }
+  &__icon-box {
+    margin: 0 auto;
+    padding: $space_l 0 $space_s;
+    width: $big_icon_size;
+    height: $big_icon_size;
+  }
+  &__icon {
+    width: $big_icon_size;
+    border-radius: 50%;
+  }
+  &__display-name {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: $space_xxs;
+  }
+  &__account-name {
+    text-align: center;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: $font-size_xxs;
+  }
+}

@@ -1,0 +1,50 @@
+.p-header {
+  position: fixed;
+  height: $header_height;
+  background: $main_color;
+  z-index: 5;
+  &__content {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $space_s;
+  }
+  &__title {
+    line-height: $header_height;
+    font-size: $font-size_lm;
+    color: $color_white;
+    width: $sidebar_width;
+    font-weight: $font_weight_s;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: $space_large_s;
+    @include member-mq('md'){
+      display: none;
+    }
+  }
+  &__menu {
+    display: flex;
+    align-items: center;
+  }
+  &__menu-link {
+    display: block;
+    color: $color_white;
+    line-height: $header_height;
+    padding: 0 $space_xs;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &__logout {
+    display: block;
+    color: $color_white;
+    box-sizing: border-box;
+    line-height: $header_height;
+    padding: 0 $space_s;
+  }
+}

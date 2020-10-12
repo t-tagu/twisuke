@@ -1,0 +1,21 @@
+.p-top-menu {
+  display: flex;
+  align-items: center;
+  font-size: $font-size_3l;
+  @include top-mq('lg'){
+    display: none;
+  }
+  &__item {
+    margin-right: $space_m;
+  }
+  &__link {
+    display: block;
+    text-decoration: none;
+    color: $color_white;
+    font-size: $font-size_m;
+    line-height: $top-header_height;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

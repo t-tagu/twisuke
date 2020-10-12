@@ -1,0 +1,94 @@
+$site-width: 980px;
+
+//フォントサイズ
+$font-size_xxs: 12px;
+$font-size_xs: 13px;
+$font-size_s: 14px;
+$font-size_m: 16px;
+$font-size_l: 18px;
+$font-size_2l: 20px;
+$font-size_3l: 24px;
+$font-size_4l: 26px;
+
+//大きいフォントサイズで複数使うサイズ
+$font-size_ls: 38px;
+$font-size_lm: 40px;
+
+$header-title_size: 42px;
+
+//カラー
+$main_color : #66d5ff; //rgba(102,213,255)
+$main_border_color : #e6e6e6;
+$dangerous_color : #eb2142; //削除やキャンセルのカラー
+$alert_color : #cc4539; //エラーのカラー
+$attension_color : #909090; //注意書きのカラー
+$menu_color : #f6fafa;
+$placeholder_color : #a3aebf;
+$color_white : #fff;
+$entrance-brn_color: #00acee;
+$sidebar_bg_color: #f9fafc;
+$link_color: #0033cc;
+
+//フォントカラー
+$font-color_default: #555555;
+
+//フォント
+$font:'Noto Sans Japanese', -apple-system, "Droid Sans", Roboto, "ヒラギノ角ゴ ProN W3",
+       "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, HelveticaNeue, Helvetica, sans-serif;
+
+//ログインや新規登録のボタンサイズ
+$entrance-btn-size: 40px;
+
+//スペース
+$space_xxs: 5px;
+$space_xs: 10px;
+$space_s: 15px;
+$space_m: 20px;
+$space_l: 20px;
+$space_xl: 25px;
+$space_xxl: 30px;
+
+//大きいサイズのスペース
+$space_large_xs: 40px;
+$space_large_s: 50px;
+$space_large_m: 60px;
+$space_large_l: 70px;
+$space_large_xl: 80px;
+
+//ヘッダーとコンテントの共通スペース
+$common_space: 45px;
+//ヘッダーの高さ
+$header_height: 60px;
+//トップページのヘッダーの高さ
+$top-header_height: 80px;
+//フッターの高さ
+$footer_height: 60px;
+//ツイートボタンの削除、編集ボタン、アカウント管理の削除や切り替えボタンの高さ
+$mini_btn_height: 30px;
+//フラッシュメッセージ幅
+$flash-message_width: 600px;
+//アイコンサイズ
+$icon_size: 45px;
+//大きいアイコンサイズ
+$big_icon_size: 60px;
+//アイコン右パッディング
+$icon-right_padding: 5px;
+//フォームパーツのボタンや入力欄の高さ
+$form_parts_height: 45px;
+//レスポンス対応のフォームパーツのボタンや入力欄の高さ
+$form_parts_height_s: 35px;
+//フォームボタンのボタンの幅
+$form_button_width: 200px;
+//共通のradius
+$common_box_radius: 5px;
+//サイドバーのサイズ
+$sidebar_width: 260px;
+//出欠入力のボタンのフォントサイズ
+$enter_font_size: 45px;
+
+//フォントウェイト
+$font_weight_mini: 200;
+$font_weight_xs: 600;
+$font_weight_s: 700;
+$font_weight_m: 800;
+$font_weight_l: 900;
