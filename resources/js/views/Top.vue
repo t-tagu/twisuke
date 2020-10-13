@@ -6,21 +6,21 @@
         <div class="p-hero__container">
           <div class="p-hero__content">
             <h2 class="p-hero__title">フォロワーとのスケジュール調整を<br class="p-hero__title--newline">ワンストップで</h2>
-            <p class="p-hero__description">ツイ助はツイッターのフォロワー間でのイベントや集まりのスケジュール調整を<br class="p-hero__description--newline">ワンストップでおこなうことができるウェブサービスです。</p>
-            <a class="p-hero__link" href="/login">アプリをすぐ使う</a>
+            <p class="p-hero__description">{{ appName }}はツイッターのフォロワー間でのイベントや集まりのスケジュール調整を<br class="p-hero__description--newline">ワンストップでおこなうことができるウェブサービスです。</p>
+            <a class="p-hero__link" href="/login">{{ appName }}をすぐ使う</a>
           </div>
         </div>
       </section>
       <div class="u-bg-white-color">
         <section class="p-top__container" id="about">
-          <h2 class="p-top__container-title p-top__container-title--color">アプリとは何ですか？</h2>
+          <h2 class="p-top__container-title p-top__container-title--color">{{ appName }}とは何ですか？</h2>
           <div class="p-top__container-content">
             <div class="p-top__image-wrapper">
               <img class="p-top__image" src="/image/about.jpg">
             </div>
             <p class="p-top__about">
-              アプリはツイッターのフォロワー同士のスケジュール調整を効率的におこなうウェブサービスです。<br>
-              イベントを作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。<br>
+              {{ appName }}はツイッターのフォロワー同士のスケジュール調整を効率的におこなうウェブサービスです。<br>
+              イベント作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。<br>
               アプリを使って効率的にスケジュール調整をしましょう！
             </p>
           </div>
@@ -60,7 +60,7 @@
                   </div>
                   <div class="p-top__panel-body">
                     <h3 class="p-top__panel-title">DM送信</h3>
-                    <p class="p-top__panel-description">スケジュール調整をお願いしたいフォロワーにはDMでまとめてURLを送ることができます！</p>
+                    <p class="p-top__panel-description">スケジュール調整をお願いしたいフォロワーにはDMでまとめて1０人までURLを送ることができます！</p>
                   </div>
                 </div>
               </li>
@@ -92,7 +92,7 @@
       </div>
     </main>
     <footer class="l-footer p-footer u-ml0">
-      <p>Copyright © アプリ名. All Rights Reserved</p>
+      <p>Copyright © {{ appName }}. All Rights Reserved</p>
     </footer>
   </div>
 </template>
@@ -100,7 +100,12 @@
 <script>
 
 export default {
-  name: 'Top'
+  name: 'Top',
+  data: function(){
+    return {
+      appName: 'ツイ助'
+    }
+  },
 }
 
 </script>

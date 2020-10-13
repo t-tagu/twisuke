@@ -52,7 +52,7 @@
             <h2 class="p-accordion__subtitle">スケジュール入力URL</h2>
             <div class="p-accordion__share-container">
               <p class="p-accordion__url">{{ eventURL }}</p>
-              <a class="p-accordion__share-link" :href="shareURL+eventId">
+              <a class="p-accordion__share-link" :href="shareURL">
                 イベントをDMで共有
               </a>
             </div>
@@ -89,6 +89,11 @@ export default {
   props: {
     title: {type: String, required: true},
     eventId: {type: String, required: true}
+  },
+  computed: {
+    shareURL :function(){
+      return this.shareURL+this.eventId;
+    }
   },
   methods: {
     toggle: function(){

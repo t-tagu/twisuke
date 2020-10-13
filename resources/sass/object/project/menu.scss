@@ -32,6 +32,7 @@
     overflow: hidden;
     white-space:  nowrap;
     text-overflow: ellipsis;
+    margin-bottom: $space_xxs;
   }
   &__account-name {
     display: block;

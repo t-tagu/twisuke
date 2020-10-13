@@ -13,7 +13,7 @@
         </div>
         <div class="p-event__secretary-container p-event__subcontainer">
           <h2 class="p-event__subtitle">幹事</h2>
-          <a class="p-event__secretary-link" :href="'https://twitter.com/'+account">
+          <a class="p-event__secretary-link" :href="secretaryURL">
             <div class="p-event__secretary-content">
               <div class="p-event__icon-box">
                 <img class="p-event__icon" :src="image">
@@ -127,6 +127,11 @@ export default {
   props: {
     event_id: String
   },
+  computed: {
+    secretaryURL :function(){
+      return 'https://twitter.com/'+this.account;
+    }
+  },
   mounted: function() {
     this.getEventData();
   },
@@ -214,7 +219,6 @@ export default {
       }).then(response => {
         this.showFlashMessage('スケジュールを入力しました！');
       }).catch((e) => {
-        //this.handleErrors(e);
         this.handleErrors({e : e, router : this.$router});
       });
 

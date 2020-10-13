@@ -7,7 +7,7 @@
         </div>
         <div class="p-sidebar__name">
           <span class="p-sidebar__display-name">{{ displayName }}</span>
-          <span class="p-sidebar__account-name">{{ accountName }}</span>
+          <span class="p-sidebar__account-name">@{{ accountName }}</span>
         </div>
       </div>
     </div>

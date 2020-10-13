@@ -1,12 +1,15 @@
 <template>
   <content-inner :title='title'>
     <div class="p-my-event__container">
-      <div class="p-my-event__list-container">
+      <div class="p-my-event__list-container" v-if="eventData.length">
         <ul class="p-my-event__list">
           <li class="p-my-event__list-item" v-for="(item, index) in eventData" v-bind:key="item.id">
             <accordion v-bind:title="item.name" v-bind:eventId="item.event_id"></accordion>
           </li>
         </ul>
+      </div>
+      <div class="p-my-event__no-event" v-else>
+        作成したイベントはありません。
       </div>
     </div>
   </content-inner>

@@ -10,12 +10,6 @@
               <i class="fab fa-twitter p-form__icon"></i>ツイッターでログイン
             </button>
           </div>
-          <div class="c-form__box p-form__box">
-            <input class="p-form__check" type="checkbox" name="remember" id="remember">
-            <label class="p-form__label" for="remember">
-              ログインを保持する
-            </label>
-          </div>
           <div class="p-form__linkbox">
             <a class="p-form__link p-form__link--top" href="/">トップへ戻る</a>
           </div>

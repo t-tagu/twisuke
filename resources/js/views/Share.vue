@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="p-share__select-container p-share__subcontainer">
-        <h2 class="p-share__subtitle">共有先をフォロワーから選択<span class="p-share__subtitle-attension">※１度に10名まで送信可能</span></h2>
+        <h2 class="p-share__subtitle">共有先をフォロワーから選択<span class="p-share__subtitle-attension">※１度に{{ maxAddress }}名まで送信可能</span></h2>
         <v-select
           class="p-share__select"
           :options="follower"
@@ -43,7 +43,7 @@
           <textarea class="p-share__textarea" placeholder="DM内容を入力" maxlength="500" rows="5" v-model="message">{{ message }}</textarea>
         </div>
         <div class="p-share__tweet-count-box">
-          <span class="p-share__count">{{ charaCount }}/500</span>
+          <span class="p-share__count">{{ charaCount }}/{{ messageMaxLength }}</span>
         </div>
       </div>
       <button class="c-button p-share__button" v-on:click="send">DMを送信する</button>
@@ -66,6 +66,8 @@ export default {
       title: 'イベント共有',
       follower: [],
       message: '',
+      messageMaxLength: 500,
+      maxAddress: 10,
       selected: null,
       flashMessage: '',
       isFlashShow: false,
@@ -116,13 +118,18 @@ export default {
         return;
       }
 
-      if(this.selected.length > 10){
-        alert('同時に送信できるのは10人までです。');
+      if(this.selected.length > this.maxAddress){
+        alert('同時に送信できるのは'+this.maxAddress+'人までです。');
         return;
       }
 
       if(!this.message){
-        alert('送信するメッセージを入力下ください。');
+        alert('メッセージを入力下ください。');
+        return;
+      }
+
+      if(this.message.length > messageMaxLength){
+        alert('メッセージは'+this.messageMaxLength+'文字までです。');
         return;
       }
 

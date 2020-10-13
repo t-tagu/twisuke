@@ -4,11 +4,17 @@
       <form class="p-schedule__form" v-on:submit.prevent="makeEvent">
         <div class="p-schedule__title-container p-schedule__subcontainer">
           <h2 class="p-schedule__subtitle">イベント名</h2>
-          <input class="p-schedule__name" v-model="name" placeholder="イベント名を入力">
+          <input class="p-schedule__name" v-model="name" :maxlength="nameMaxLength" placeholder="イベント名を入力(必須40文字以内)">
+          <div class="p-schedule__name-count-box">
+            <span class="p-schedule__name-count">{{ nameCount }}/{{ nameMaxLength }}</span>
+          </div>
         </div>
         <div class="p-schedule__about-container p-schedule__subcontainer">
           <h2 class="p-schedule__subtitle">イベント説明・連絡事項</h2>
-          <textarea class="p-schedule__about-comment" placeholder="イベントの説明や連絡事項を入力" rows="5" v-model="explain">{{ explain }}</textarea>
+          <textarea class="p-schedule__explain" placeholder="イベントの説明や連絡事項を入力(任意500文字以内)" :maxlength="explainMaxLength" rows="5" v-model="explain">{{ explain }}</textarea>
+          <div class="p-schedule__explain-count-box">
+            <span class="p-schedule__explain-count">{{ explainCount }}/{{ explainMaxLength }}</span>
+          </div>
         </div>
         <div class="p-schedule__calendar-container p-schedule__subcontainer">
           <h2 class="p-schedule__subtitle">候補日程</h2>
@@ -46,6 +52,14 @@ export default {
   components: {
     Datepicker
   },
+  computed: {
+    nameCount: function() {
+      return this.name.length;
+    },
+    explainCount: function() {
+      return this.explain.length;
+    },
+  },
   beforeRouteEnter: (to, from, next) => {
     axios.get('/auth_check').then(response=> { //認証済みならイベント作成画面へ
       if(response.data.authStatus){
@@ -60,6 +74,8 @@ export default {
       title: 'イベント作成',
       name: '',
       explain: '',
+      nameMaxLength: 40,
+      explainMaxLength: 500,
       dates: [],
       candidateDate:'',
       mode: 'single',
@@ -80,9 +96,20 @@ export default {
     makeEvent: function(){ //イベントのデータをDBに登録
 
       let eventName = this.name;
+      let explain = this.explain;
 
       if(!eventName){
         alert(ENTER_EVENT_NAME);
+        return;
+      }
+
+      if(eventName.length > this.nameMaxLength){
+        alert('イベント名は'+this.nameMaxLength+'文字までです。');
+        return;
+      }
+
+      if(explain.length > this.explainMaxLength){
+        alert('説明は'+this.explainMaxLength+'文字までです。');
         return;
       }
 

@@ -160,7 +160,7 @@ table {
   font-weight: 700;
   font-size: 16px;
   text-align: center;
-  margin: 0 0 20px; }
+  margin: 0 0 25px; }
 
 .p-form__btn {
   height: 40px;
@@ -309,7 +309,8 @@ table {
     display: block;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    margin-bottom: 5px; }
   .p-menu__account-name {
     display: block;
     text-overflow: ellipsis;
@@ -350,7 +351,12 @@ table {
   font-size: 16px;
   width: 100%; }
 
-.p-schedule__about-comment {
+.p-schedule__name-count-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0 0 60px; }
+
+.p-schedule__explain {
   width: 100%;
   padding: 5px 5px;
   margin: 0 auto;
@@ -360,6 +366,11 @@ table {
   outline: none;
   font-size: 16px;
   box-sizing: border-box; }
+
+.p-schedule__explain-count-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0 0 60px; }
 
 .p-schedule__format {
   line-height: 1.5;
@@ -687,6 +698,9 @@ table {
 
 .p-my-event__list-item {
   margin-bottom: 25px; }
+
+.p-my-event__no-event {
+  text-align: center; }
 
 .p-accordion {
   background: #fff;
