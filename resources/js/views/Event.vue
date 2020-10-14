@@ -89,7 +89,10 @@
           </div>
           <div class="p-event__comment-area">
             <h2 class="p-event__subtitle">コメント</h2>
-            <textarea class="p-event__comment" placeholder="例)20:00から参加します！" v-model="comment">{{ comment }}</textarea>
+            <textarea class="p-event__comment" placeholder="例)20:00から参加します！(※任意200文字以内)" :maxlength="commentMaxLength" v-model="comment">{{ comment }}</textarea>
+          </div>
+          <div class="p-event__comment-count-box">
+            <span class="p-event__comment-count">{{ commentCount }}/{{ commentMaxLength }}</span>
           </div>
         </div>
         <input class="c-button p-event__button" type="submit" value="日程を入力する">
@@ -121,7 +124,8 @@ export default {
       eachVotes: [],
       attendance: [],
       flashMessage: '',
-      isFlashShow: false
+      isFlashShow: false,
+      commentMaxLength: 200
     }
   },
   props: {
@@ -130,6 +134,9 @@ export default {
   computed: {
     secretaryURL :function(){
       return 'https://twitter.com/'+this.account;
+    },
+    commentCount: function() {
+      return this.comment.length;
     }
   },
   mounted: function() {
@@ -174,7 +181,6 @@ export default {
         this.attendance = response.data.attendance;
 
         let dateStringArray = response.data.candidateDate.split('\n');
-        console.log(dateStringArray);
 
         for(let i = 0; i < dateStringArray.length; i++){
           let obj = {'date': dateStringArray[i],
@@ -215,6 +221,11 @@ export default {
       formData.append('submissionDate',this.submissionDate.join(','));
       formData.append('comment',this.comment);
 
+      if(this.comment.length > this.commentMaxLength){
+        alert('コメントは'+this.commentMaxLength+'文字以内までです。');
+        return;
+      }
+
       axios.post('/enter_schedule',formData,{
       }).then(response => {
         this.showFlashMessage('スケジュールを入力しました！');
@@ -225,7 +236,6 @@ export default {
     },
     onSubmissionDayChange: function(event){ //提出日の変更
       this.submissionDate.splice(event.target.name, 1, Number(event.target.value));
-      console.log(this.submissionDate);
     },
     showFlashMessage: function(message){
       this.isFlashShow = true;

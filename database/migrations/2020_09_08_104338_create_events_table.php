@@ -15,9 +15,11 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('event_id');
             $table->string('twitter_id');
             $table->string('name');
-            $table->string('explain')->nullable();
+            $table->string('explain',1000)->nullable();
+            $table->string('candidate_schedule');
             $table->string('url');
             $table->tinyInteger('delete_flg')->default(1);
             $table->timestamps();

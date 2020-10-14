@@ -23,6 +23,11 @@
     font-size: $font-size_m;
     box-sizing: border-box;
   }
+  &__comment-count-box {
+    display: flex;
+    justify-content: flex-end;
+    padding: $space_m 0 0 $space_large_m;
+  }
   &__secretary-content {
     display: flex;
     align-items: center;

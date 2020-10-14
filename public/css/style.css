@@ -561,6 +561,11 @@ table {
   font-size: 16px;
   box-sizing: border-box; }
 
+.p-event__comment-count-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0 0 60px; }
+
 .p-event__secretary-content {
   display: flex;
   align-items: center; }
