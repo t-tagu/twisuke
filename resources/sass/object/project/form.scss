@@ -2,9 +2,10 @@
   &__title {
     padding: $space_large_xs 0 $space_large_xs;
     text-align: center;
+    font-weight: bold;
   }
   &__toplink {
-    font-size: 36px; //TODO:仮入れ
+    font-size: $font-size_ls;
   }
   &__subtitle {
     font-weight: $font_weight_s;

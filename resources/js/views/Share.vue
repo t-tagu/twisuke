@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="p-share__select-container p-share__subcontainer">
-        <h2 class="p-share__subtitle">共有先をフォロワーから選択<span class="p-share__subtitle-attension">※１度に{{ maxAddress }}名まで送信可能</span></h2>
+        <h2 class="p-share__subtitle">共有先を相互フォロー間から選択<span class="p-share__subtitle-attension">※１度に{{ maxAddress }}名まで送信可能</span></h2>
         <v-select
           class="p-share__select"
           :options="follower"
@@ -40,7 +40,7 @@
       </div>
       <div class="p-share__tweet-area">
         <div class="p-share__tweet-box">
-          <textarea class="p-share__textarea" placeholder="DM内容を入力" maxlength="500" rows="5" v-model="message">{{ message }}</textarea>
+          <textarea class="p-share__textarea" placeholder="DM内容を入力" :maxlength="messageMaxLength" rows="5" v-model="message">{{ message }}</textarea>
         </div>
         <div class="p-share__tweet-count-box">
           <span class="p-share__count">{{ charaCount }}/{{ messageMaxLength }}</span>
@@ -113,7 +113,7 @@ export default {
     },
     send: function(){ //DMを送信する
 
-      if(!this.selected){
+      if(!this.selected.length){
         alert('送信先を選択して下さい。');
         return;
       }
@@ -123,12 +123,14 @@ export default {
         return;
       }
 
+      return;
+
       if(!this.message){
         alert('メッセージを入力下ください。');
         return;
       }
 
-      if(this.message.length > messageMaxLength){
+      if(this.message.length > this.messageMaxLength){
         alert('メッセージは'+this.messageMaxLength+'文字までです。');
         return;
       }

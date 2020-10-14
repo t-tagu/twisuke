@@ -12,7 +12,7 @@
   &__subtitle-attension {
     font-size: 11px;
     margin-left: $space_xs;
-    @include member-mq('xxs'){
+    @include member-mq('xs'){
       display: block;
       font-size: 10px;
       margin: $space_xxs 0 0 0;

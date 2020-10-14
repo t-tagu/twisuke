@@ -3,7 +3,7 @@
     <div class="c-container p-container">
       <div class="c-container__inner p-container__inner">
         <form class="c-form p-form" v-on:submit.prevent="login">
-          <h1 class="p-form__title"><a class="p-form__toplink">{{ appName }}</a></h1>
+          <h1 class="p-form__title"><a class="p-form__toplink" href="/">{{ appName }}</a></h1>
           <h2 class="p-form__subtitle">ログイン</h2>
           <div class="c-form__box p-form__box u-mb25">
             <button type="submit" class="c-form__btn p-form__btn">

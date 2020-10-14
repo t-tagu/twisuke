@@ -2,8 +2,8 @@
 <template>
   <nav class="p-top-trigger-menu" v-bind:class="{'p-top-trigger-menu--active': active }" v-if="isShow">
     <ul class="p-top-trigger-menu__list">
-      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: 1000, offset: -60 }">ツイ助とは</a></li>
-      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: 1000, offset: -60 }">機能紹介</a></li>
+      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset }">アプリ名とは</a></li>
+      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset }">機能紹介</a></li>
       <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="/login">ログイン</a></li>
     </ul>
   </nav>
@@ -12,13 +12,16 @@
 <script>
 import { eventBus } from '../app';
 
-let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
+let SHOW_WIDTH = 980; //メニューの表示・非表示の切り替え
+let OFFSET_BORDER = 720; //スクロールオフセットの切り替え
 
   export default {
     data: function(){
       return {
         active: false,
-        isShow: false
+        isShow: false,
+        scrollDuration: 1000,
+        offset: -80
       }
     },
     mounted: function(){
@@ -39,6 +42,12 @@ let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
           this.isShow = true;
         }else{
           this.isShow = false;
+        }
+
+        if(window.innerWidth <= OFFSET_BORDER){
+          this.offset = -60;
+        }else{
+          this.offset = -80;
         }
       }
     }

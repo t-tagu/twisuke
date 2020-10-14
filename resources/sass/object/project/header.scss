@@ -13,9 +13,11 @@
   &__title {
     line-height: $header_height;
     font-size: $font-size_lm;
-    color: $color_white;
     width: $sidebar_width;
-    font-weight: $font_weight_s;
+    font-weight: bold;
+  }
+  &__toplink {
+    color: $color_white;
   }
   &__nav {
     display: flex;

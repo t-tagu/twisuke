@@ -17,6 +17,9 @@
     border-top: 1px solid #dfdfdf;
     margin: 0 $space_m;
     text-align:  center;
+    &:first-child {
+      border-top: none;
+    }
     &:last-child {
       border-bottom: 1px solid #dfdfdf;
     }

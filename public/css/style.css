@@ -151,10 +151,11 @@ table {
 
 .p-form__title {
   padding: 40px 0 40px;
-  text-align: center; }
+  text-align: center;
+  font-weight: bold; }
 
 .p-form__toplink {
-  font-size: 36px; }
+  font-size: 38px; }
 
 .p-form__subtitle {
   font-weight: 700;
@@ -217,9 +218,10 @@ table {
   .p-header__title {
     line-height: 60px;
     font-size: 40px;
-    color: #fff;
     width: 260px;
-    font-weight: 700; }
+    font-weight: bold; }
+  .p-header__toplink {
+    color: #fff; }
   .p-header__nav {
     display: flex;
     align-items: center;
@@ -451,7 +453,7 @@ table {
 .p-share__subtitle-attension {
   font-size: 11px;
   margin-left: 10px; }
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 550px) {
     .p-share__subtitle-attension {
       display: block;
       font-size: 10px;
@@ -1118,6 +1120,8 @@ table {
     border-top: 1px solid #dfdfdf;
     margin: 0 20px;
     text-align: center; }
+    .p-top-trigger-menu__item:first-child {
+      border-top: none; }
     .p-top-trigger-menu__item:last-child {
       border-bottom: 1px solid #dfdfdf; }
   .p-top-trigger-menu__link {
