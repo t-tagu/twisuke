@@ -64,7 +64,6 @@
   }
   &__table-area {
     overflow: auto; //tableをスクロールさせる
-    white-space: nowrap; //文字の折り返しを禁止
   }
   &__table {
     table-layout: fixed;
@@ -74,6 +73,7 @@
     text-align: left;
     border: 1px solid #e6e6e6;
     padding: $space_xs;
+    white-space: nowrap; //文字の折り返しを禁止
   }
   &__table-data {
     text-align: center;
@@ -81,5 +81,11 @@
     width: 120px;
     min-width: 120px;
     padding: $space_xs;
+    &--minifont {
+      font-size: $font-size_xs;
+      @include member-mq('sm'){
+        font-size: $font-size_xxs;
+      }
+    }
   }
 }

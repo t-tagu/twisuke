@@ -12,6 +12,12 @@ use Log;
 
 class MyEventsController extends Controller
 {
+    const MARU = "○";
+    const SANKAKU = "△";
+    const BATSU = "×";
+    const VOTE_OF_MARU = 1;
+    const VOTE_OF_SANKAKU = 2;
+
     /**
     * ユーザーの存在チェック
     *
@@ -37,7 +43,7 @@ class MyEventsController extends Controller
     public function getMyEventData(Request $request){
 
       $request->validate([
-        'twitterId' => 'required|string',
+        'twitterId' => 'required|string'
       ]);
 
       $eventData = Event::where('twitter_id',$request->twitterId)->get(['name','event_id']);
@@ -53,7 +59,7 @@ class MyEventsController extends Controller
     public function getEventDetail(Request $request){
 
       $request->validate([
-        'eventId' => 'required|string',
+        'eventId' => 'required|string'
       ]);
 
       $eventData = Event::where('event_id',$request->eventId)->get(['explain','candidate_schedule']);
@@ -62,11 +68,11 @@ class MyEventsController extends Controller
 
       foreach($eventData as $data){
         $explain = $data->explain;
-        $candidateDate = $data->candidate_schedule;
+        $candidateDate = json_decode($data->candidate_schedule);
       }
 
       //候補日程への投票数をカウントする配列を作成
-      $voteCount = array_fill(0, count(explode("\n", $candidateDate)), array_fill(0, 3, 0));
+      $voteCount = array_fill(0, count($candidateDate), array_fill(0, 3, 0));
 
       $voteData = Vote::where('event_id',$request->eventId)->get(['twitter_id','vote','comment']);
       $twitterId = array();
@@ -75,7 +81,8 @@ class MyEventsController extends Controller
 
       foreach($voteData as $data){
         array_push($twitterId, $data->twitter_id);
-        array_push($voteDate, explode(",", $data->vote));
+        //array_push($voteDate, explode(",", $data->vote));
+        array_push($voteDate, json_decode($data->vote));
         if(!empty($data->comment)){ //コメントを取得
           array_push($comment, $data->comment);
         }else{
@@ -84,7 +91,7 @@ class MyEventsController extends Controller
       }
 
       //候補日の長さの配列で、その中に人数分の長さの配列を格納する(2次元配列)
-      $personalChoice = array_fill(0, count(explode("\n", $candidateDate)), array_fill(0, count($twitterId), "×"));
+      $personalChoice = array_fill(0, count($candidateDate), array_fill(0, count($twitterId), "×"));
 
       $twitterName = array();
       if(!empty($twitterId)){
@@ -104,11 +111,11 @@ class MyEventsController extends Controller
 
       for($i = 0; $i < count($voteDate); $i++){ //$i→$i+1人目、$m→$m+1日目の候補日
         for($m = 0; $m < count($voteDate[$i]); $m++){
-          $attendance = "×";
-          if($voteDate[$i][$m] === '1'){ //○の場合
-            $attendance = "○";
-          }elseif($voteDate[$i][$m] === '2'){ //△の場合
-            $attendance = "△";
+          $attendance = self::BATSU;
+          if($voteDate[$i][$m] === self::VOTE_OF_MARU){ //○の場合
+            $attendance = self::MARU;
+          }elseif($voteDate[$i][$m] === self::VOTE_OF_SANKAKU){ //△の場合
+            $attendance = self::SANKAKU;
           }
           $personalChoice[$m][$i] = $attendance; //逆にする
         }
@@ -116,9 +123,9 @@ class MyEventsController extends Controller
 
       for($i = 0; $i < count($voteDate); $i++){ //$i→$i+1人目、$m→$m+1日目の候補日
         for($m = 0; $m < count($voteDate[$i]); $m++){
-          if($voteDate[$i][$m] === '1'){ //○の場合
+          if($voteDate[$i][$m] === self::VOTE_OF_MARU){ //○の場合
             $voteCount[$m][0] += 1;
-          }elseif($voteDate[$i][$m] === '2'){ //△の場合
+          }elseif($voteDate[$i][$m] === self::VOTE_OF_SANKAKU){ //△の場合
             $voteCount[$m][1] += 1;
           }else{ //×の場合
             $voteCount[$m][2] += 1;

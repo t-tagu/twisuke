@@ -131,7 +131,7 @@ class SharesController extends Controller
       foreach($res as $value){
         $messa = $value->name."さん"."\n".$message;
         $id = $value->id_str;
-        $array = array('id'=> $id, 'message'=>$messa);
+        $array = array('id'=> $id, 'message'=>$message);
         array_push($destinationInfo, $array);
       }
     }else{

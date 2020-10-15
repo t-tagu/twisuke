@@ -69,6 +69,13 @@ export default {
       }
     });
   },
+  created(){
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize()
+  },
+  destroyed(){
+    window.removeEventListener('resize', this.handleResize);
+  },
   data: function(){
     return {
       title: 'イベント作成',
@@ -113,10 +120,15 @@ export default {
         return;
       }
 
+      if(!((this.candidateDate.trim()).length)){
+        alert('候補日程を入力して下さい。');
+        return;
+      }
+
       let formData = new FormData();
       formData.append('name',eventName);
       formData.append('explain',this.explain);
-      formData.append('candidateDate',this.candidateDate);
+      formData.append('candidateDate',JSON.stringify((this.candidateDate.trim()).split(/\n/)));
 
       axios.post('/make_event',formData,{
       }).then(response => {
@@ -133,20 +145,12 @@ export default {
     },
     showAndHide: function(){
       this.isCalendarShow = !this.isCalendarShow;
-      console.log(this.isCalendarShow);
     },
     handleResize: function(){
       if(window.innerWidth >= 600){
         this.isCalendarShow = true;
       }
     }
-  },
-  created() {
-        window.addEventListener('resize', this.handleResize)
-        this.handleResize()
-        },
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize)
-    }
+  }
 }
 </script>

@@ -72,7 +72,6 @@ export default {
         that.firebaseTwitterAuthentication(result);
       }
     }).catch(function(e){
-      console.log(e.message);
       that.firebaseErrorMessage(e);
     });
   },

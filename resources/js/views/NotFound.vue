@@ -10,12 +10,12 @@
           {{ sentense }}
         </p>
         <div class="p-page404__link-box">
-          <a class="p-page404__link" href="/">{{ toTop }}</a>
+          <a class="p-page404__link" href="/">{{ appName }}トップへ</a>
         </div>
       </div>
     </div>
     <footer class="l-footer p-footer u-ml0">
-      <p>Copyright © アプリ名. All Rights Reserved</p>
+      <p>Copyright © {{ appName }}. All Rights Reserved</p>
     </footer>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
       mainTitle: "404",
       subTitle: "Not Found",
       sentense: "お探しのページは存在しないか、一時的にアクセスができない状況にある可能性があります。 また、URL、ファイル名にタイプミスがないか再度ご確認ください。",
-      toTop: "トップへ"
+      appName: "ツイ助"
     }
   }
 }

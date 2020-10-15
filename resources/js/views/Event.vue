@@ -54,7 +54,7 @@
                   <td class="p-event__table-data"></td>
                   <td class="p-event__table-data"></td>
                   <td class="p-event__table-data"></td>
-                  <td v-for="(item, index) in eachVotes" class="p-accordion__table-data">
+                  <td v-for="(item, index) in eachVotes" class="p-accordion__table-data p-accordion__table-data--minifont">
                     {{ item.comment }}
                   </td>
                 </tr>
@@ -139,7 +139,7 @@ export default {
       return this.comment.length;
     }
   },
-  mounted: function() {
+  created: function() {
     this.getEventData();
   },
   beforeRouteEnter: (to, from, next) => {
@@ -180,7 +180,7 @@ export default {
         this.voteCount = response.data.vote;
         this.attendance = response.data.attendance;
 
-        let dateStringArray = response.data.candidateDate.split('\n');
+        let dateStringArray = response.data.candidateDate;
 
         for(let i = 0; i < dateStringArray.length; i++){
           let obj = {'date': dateStringArray[i],
@@ -208,17 +208,12 @@ export default {
       });
 
     },
-    formatDate: function(date, format){
-      format = format.replace(/YYYY/, date.getFullYear());
-      format = format.replace(/MM/, date.getMonth()+1);
-      format = format.replace(/DD/, date.getDate());
-      return format;
-    },
     enterSchedule: function(){
 
       let formData = new FormData();
       formData.append('eventId',this.event_id);
-      formData.append('submissionDate',this.submissionDate.join(','));
+      //formData.append('submissionDate',this.submissionDate.join(','));
+      formData.append('submissionDate',JSON.stringify(this.submissionDate));
       formData.append('comment',this.comment);
 
       if(this.comment.length > this.commentMaxLength){

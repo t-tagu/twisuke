@@ -40,7 +40,7 @@
                     <td class="p-accordion__table-data"></td>
                     <td class="p-accordion__table-data"></td>
                     <td class="p-accordion__table-data"></td>
-                    <td v-for="(item, index) in eachVotes" class="p-accordion__table-data">
+                    <td v-for="(item, index) in eachVotes" class="p-accordion__table-data p-accordion__table-data--minifont">
                       {{ item.comment }}
                     </td>
                   </tr>
@@ -110,7 +110,7 @@ export default {
         this.eventURL = this.url+this.eventId;
         this.attendance = response.data.attendance;
 
-        let dateStringArray = response.data.candidateDate.split('\n');
+        let dateStringArray = response.data.candidateDate;
 
         for(let i = 0; i < dateStringArray.length; i++){
           let obj = {'date': dateStringArray[i],

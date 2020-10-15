@@ -539,6 +539,16 @@ table {
   justify-content: flex-end;
   padding: 20px 0 0 60px; }
 
+.p-share__time-box {
+  text-align: center;
+  margin-top: 20px; }
+
+.p-share__time-attension {
+  font-size: 11px; }
+  @media screen and (max-width: 550px) {
+    .p-share__time-attension {
+      font-size: 10px; } }
+
 .p-event__subtitle {
   font-size: 20px;
   margin: 10px 0 20px; }
@@ -602,8 +612,7 @@ table {
     cursor: pointer; }
 
 .p-event__table-area {
-  overflow: auto;
-  white-space: nowrap; }
+  overflow: auto; }
 
 .p-event__table {
   table-layout: fixed;
@@ -612,7 +621,8 @@ table {
 .p-event__table-title {
   text-align: left;
   border: 1px solid #e6e6e6;
-  padding: 10px; }
+  padding: 10px;
+  white-space: nowrap; }
 
 .p-event__table-data {
   text-align: center;
@@ -620,6 +630,11 @@ table {
   width: 120px;
   min-width: 120px;
   padding: 10px; }
+  .p-event__table-data--minifont {
+    font-size: 13px; }
+    @media screen and (max-width: 600px) {
+      .p-event__table-data--minifont {
+        font-size: 12px; } }
 
 .p-enter__list-item-inner {
   display: flex;
@@ -786,28 +801,34 @@ table {
   .p-accordion__schedule-container {
     padding-top: 40px; }
   .p-accordion__table-area {
-    overflow: auto;
-    white-space: nowrap; }
+    overflow: auto; }
   .p-accordion__table {
     table-layout: fixed;
     min-width: 100%; }
   .p-accordion__table-title {
     text-align: left;
     border: 1px solid #e6e6e6;
-    padding: 10px; }
+    padding: 10px;
+    white-space: nowrap; }
   .p-accordion__table-data {
     text-align: center;
     border: 1px solid #e6e6e6;
     width: 120px;
     min-width: 120px;
     padding: 10px; }
+    .p-accordion__table-data--minifont {
+      font-size: 13px; }
+      @media screen and (max-width: 600px) {
+        .p-accordion__table-data--minifont {
+          font-size: 12px; } }
   .p-accordion__url {
     margin: 15px 0 20px;
     word-break: break-all;
     line-height: 1.4; }
-  .p-accordion__mail-icon {
-    line-height: 45px;
-    color: #fff; }
+  .p-accordion__share-link {
+    color: #0033cc; }
+    .p-accordion__share-link:hover {
+      text-decoration: underline; }
 
 @keyframes accordion--anime__opened {
   0% {

@@ -26,9 +26,9 @@ let VALIDATION_STATUS = 422;
 let SERVER_STATUS = 500;
 
 let AUTHENTIC_ERROR_MESSAGE = '認証エラーが発生いたしました。ログインし直して下さい。';
-let VALIDATION_ERROR_MESSAGE = 'パラメータエラーが発生いたしました。ログインし直して下さい。';
-let SERVER_ERROR_MESSAGE = 'サーバーエラーが発生いたしました。ログインし直して下さい。';
-let UNEXPECTED_ERROR_MESSAGE = '予期せぬエラーが発生いたしました。ログインし直して下さい。';
+let VALIDATION_ERROR_MESSAGE = 'パラメータエラーが発生いたしました。';
+let SERVER_ERROR_MESSAGE = 'サーバーエラーが発生いたしました。';
+let UNEXPECTED_ERROR_MESSAGE = '予期せぬエラーが発生いたしました。';
 let TO_LOGIN = '/login';
 
 //グローバルメソッド

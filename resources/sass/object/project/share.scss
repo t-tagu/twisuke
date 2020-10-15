@@ -100,4 +100,14 @@
     justify-content: flex-end;
     padding: $space_m 0 0 $space_large_m;
   }
+  &__time-box {
+    text-align: center;
+    margin-top: $space_l;
+  }
+  &__time-attension {
+    font-size: 11px;
+    @include member-mq('xs'){
+      font-size: 10px;
+    }
+  }
 }

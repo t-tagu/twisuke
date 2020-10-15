@@ -6,7 +6,7 @@
           :is-full-page="true"></loading>
     <div class="p-share__container">
       <div class="p-share__title-container p-share__subcontainer">
-        <h2 class="p-share__subtitle">イベントページURL</h2>
+        <h2 class="p-share__subtitle">スケジュール入力URL</h2>
         <div class="p-share__url-container">
           <input class="p-share__url" type="text" v-model="eventURL" readonly>
           <button class="p-share__copy-button"
@@ -40,13 +40,16 @@
       </div>
       <div class="p-share__tweet-area">
         <div class="p-share__tweet-box">
-          <textarea class="p-share__textarea" placeholder="DM内容を入力" :maxlength="messageMaxLength" rows="5" v-model="message">{{ message }}</textarea>
+          <textarea class="p-share__textarea" placeholder="DM内容を入力(必須300文字以内)" :maxlength="messageMaxLength" rows="5" v-model="message">{{ message }}</textarea>
         </div>
         <div class="p-share__tweet-count-box">
           <span class="p-share__count">{{ charaCount }}/{{ messageMaxLength }}</span>
         </div>
       </div>
       <button class="c-button p-share__button" v-on:click="send">DMを送信する</button>
+      <div class="p-share__time-box">
+        <span class="p-share__time-attension">※DM送信には30秒前後かかる場合がございます。</span>
+      </div>
     </div>
   </content-inner>
 </template>
@@ -66,7 +69,7 @@ export default {
       title: 'イベント共有',
       follower: [],
       message: '',
-      messageMaxLength: 500,
+      messageMaxLength: 300,
       maxAddress: 10,
       selected: null,
       flashMessage: '',
@@ -122,8 +125,6 @@ export default {
         alert('同時に送信できるのは'+this.maxAddress+'人までです。');
         return;
       }
-
-      return;
 
       if(!this.message){
         alert('メッセージを入力下ください。');
