@@ -1,43 +1,48 @@
 <template>
-  <content-inner :title='title'>
-    <div class="p-schedule__container">
-      <form class="p-schedule__form" v-on:submit.prevent="makeEvent">
-        <div class="p-schedule__title-container p-schedule__subcontainer">
-          <h2 class="p-schedule__subtitle">イベント名</h2>
-          <input class="p-schedule__name" v-model="name" :maxlength="nameMaxLength" placeholder="イベント名を入力(必須40文字以内)">
-          <div class="p-schedule__name-count-box">
-            <span class="p-schedule__name-count">{{ nameCount }}/{{ nameMaxLength }}</span>
-          </div>
-        </div>
-        <div class="p-schedule__about-container p-schedule__subcontainer">
-          <h2 class="p-schedule__subtitle">イベント説明・連絡事項</h2>
-          <textarea class="p-schedule__explain" placeholder="イベントの説明や連絡事項を入力(任意500文字以内)" :maxlength="explainMaxLength" rows="5" v-model="explain">{{ explain }}</textarea>
-          <div class="p-schedule__explain-count-box">
-            <span class="p-schedule__explain-count">{{ explainCount }}/{{ explainMaxLength }}</span>
-          </div>
-        </div>
-        <div class="p-schedule__calendar-container p-schedule__subcontainer">
-          <h2 class="p-schedule__subtitle">候補日程</h2>
-          <div class="p-schedule__format">
-            ※1行に1つずつ候補日程と日時を以下の例のように改行で区切りながら記入して下さい。<br>
-            記入例:<br>
-            2021/07/22 19:00<br>
-            2021/07/23 17:00<br>
-            2021/07/24 20:00<br>
-          </div>
-          <div class="p-schedule__calendar-area">
-            <div class="p-schedule__candidate-container">
-              <textarea class="p-schedule__candidate-schedule" placeholder="イベントの広報日程を入力" v-model="candidateDate">{{ candidateDate }}</textarea>
-              <button class="p-schedule__calendar-btn" type="button" v-on:click="showAndHide()"><i class="fas fa-calendar-alt"></i></button>
+  <div>
+    <loading :active.sync="isLoading"
+          :can-cancel="false"
+          :is-full-page="true"></loading>
+    <content-inner :title='title'>
+      <div class="p-schedule__container">
+        <form class="p-schedule__form" v-on:submit.prevent="makeEvent">
+          <div class="p-schedule__title-container p-schedule__subcontainer">
+            <h2 class="p-schedule__subtitle">イベント名</h2>
+            <input class="p-schedule__name" v-model="name" :maxlength="nameMaxLength" placeholder="イベント名を入力(必須40文字以内)">
+            <div class="p-schedule__name-count-box">
+              <span class="p-schedule__name-count">{{ nameCount }}/{{ nameMaxLength }}</span>
             </div>
-            <datepicker class="p-schedule__calendar" :format="datePickerFormat" :inline="inline" :language="ja" :disabled-dates="disabledDates"
-                        @input="selected()" v-model="selectedDate" v-show="isCalendarShow"></datepicker>
           </div>
-        </div>
-        <input class="c-button p-schedule__button" type="submit" value="イベントを作成する">
-      </form>
-    </div>
-  </content-inner>
+          <div class="p-schedule__about-container p-schedule__subcontainer">
+            <h2 class="p-schedule__subtitle">イベント説明・連絡事項</h2>
+            <textarea class="p-schedule__explain" placeholder="イベントの説明や連絡事項を入力(任意500文字以内)" :maxlength="explainMaxLength" rows="5" v-model="explain">{{ explain }}</textarea>
+            <div class="p-schedule__explain-count-box">
+              <span class="p-schedule__explain-count">{{ explainCount }}/{{ explainMaxLength }}</span>
+            </div>
+          </div>
+          <div class="p-schedule__calendar-container p-schedule__subcontainer">
+            <h2 class="p-schedule__subtitle">候補日程</h2>
+            <div class="p-schedule__format">
+              ※1行に1つずつ候補日程と日時を以下の例のように改行で区切りながら記入して下さい。<br>
+              記入例:<br>
+              2021/07/22 19:00<br>
+              2021/07/23 17:00<br>
+              2021/07/24 20:00<br>
+            </div>
+            <div class="p-schedule__calendar-area">
+              <div class="p-schedule__candidate-container">
+                <textarea class="p-schedule__candidate-schedule" placeholder="イベントの広報日程を入力" v-model="candidateDate">{{ candidateDate }}</textarea>
+                <button class="p-schedule__calendar-btn" type="button" v-on:click="showAndHide()"><i class="fas fa-calendar-alt"></i></button>
+              </div>
+              <datepicker class="p-schedule__calendar" :format="datePickerFormat" :inline="inline" :language="ja" :disabled-dates="disabledDates"
+                          @input="selected()" v-model="selectedDate" v-show="isCalendarShow"></datepicker>
+            </div>
+          </div>
+          <input class="c-button p-schedule__button" type="submit" value="イベントを作成する">
+        </form>
+      </div>
+    </content-inner>
+  </div>
 </template>
 
 <script>
@@ -45,12 +50,15 @@ import axios from 'axios';
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
 import {ja} from 'vuejs-datepicker/dist/locale';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 let ENTER_EVENT_NAME = 'イベントの名前を入力して下さい。';
 
 export default {
   components: {
-    Datepicker
+    Datepicker,
+    Loading
   },
   computed: {
     nameCount: function() {
@@ -69,11 +77,14 @@ export default {
       }
     });
   },
-  created(){
+  created: function(){
     window.addEventListener('resize', this.handleResize);
-    this.handleResize()
+    this.handleResize();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   },
-  destroyed(){
+  destroyed: function(){
     window.removeEventListener('resize', this.handleResize);
   },
   data: function(){
@@ -96,7 +107,8 @@ export default {
       disabledDates: {
         to: new Date()
       },
-      isCalendarShow: false
+      isCalendarShow: false,
+      isLoading: true
     }
   },
   methods: {

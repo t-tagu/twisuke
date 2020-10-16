@@ -1,10 +1,13 @@
 <template>
   <div class="p-accordion">
-    <button class="p-accordion__trigger" type="button" :class="{'state-open': isOpened}" @click="toggle()">
+    <loading :active.sync="isFetchingEventData"
+          :can-cancel="false"
+          :is-full-page="true"></loading>
+    <button class="p-accordion__trigger" type="button" :class="{'state-open': isAccordionOpened}" @click="toggle()">
       <div>{{ title }}</div>
     </button>
     <transition name="p-accordion" @enter="enter" @after-enter="afterEnter" @leave="leave" @after-leave="afterLeave">
-      <div class="p-accordion__target" :class="{'state-open': isOpened}" v-if="isOpened">
+      <div class="p-accordion__target" :class="{'state-open': isAccordionOpened}" v-if="isAccordionOpened">
         <div class="p-accordion__body">
           <div class="p-accordion__about-container p-accordion__subcontainer">
             <h2 class="p-accordion__subtitle">イベント説明・連絡事項</h2>
@@ -66,15 +69,20 @@
 
 <script>
 import axios from 'axios';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 function nextFrame(fn){
   window.requestAnimationFrame(() => window.requestAnimationFrame(fn));
 }
 
 export default {
+  components: {
+    Loading
+  },
   data: function(){
     return{
-      isOpened: false,
+      isAccordionOpened: false,
       explain: '説明はありません',
       candidateDate: [],
       voteCount: [],
@@ -83,7 +91,8 @@ export default {
       attendance: [],
       url: 'http://127.0.0.1:8000/event/',
       eventURL: '',
-      shareURL: 'http://127.0.0.1:8000/share/'
+      shareURL: 'http://127.0.0.1:8000/share/',
+      isFetchingEventData: false
     }
   },
   props: {
@@ -97,40 +106,57 @@ export default {
   },
   methods: {
     toggle: function(){
-      axios.post('/get_event_detail',{
-        eventId: this.eventId
-      }).then(response => {
 
-        this.initialState();
+      if(!this.isAccordionOpened){ //開く時
 
-        if(response.data.explain){
-          this.explain = response.data.explain;
-        }
-        this.voteCount = response.data.vote;
-        this.eventURL = this.url+this.eventId;
-        this.attendance = response.data.attendance;
+        this.isFetchingEventData = true;
+        axios.post('/get_event_detail',{
+          eventId: this.eventId
+        }).then(response => {
 
-        let dateStringArray = response.data.candidateDate;
+          this.initialState();
 
-        for(let i = 0; i < dateStringArray.length; i++){
-          let obj = {'date': dateStringArray[i],
-                     'circleCount': this.voteCount[i][0],
-                     'triangleCount': this.voteCount[i][1],
-                     'crossCount': this.voteCount[i][2],
-                     'vote':this.attendance[i]
-                   };
-          this.candidateDate.push(obj);
-        }
+          if(response.data.explain){
+            this.explain = response.data.explain;
+          }
+          this.voteCount = response.data.vote;
+          this.eventURL = this.url+this.eventId;
+          this.attendance = response.data.attendance;
 
-        for(let i = 0; i < response.data.voters.length; i++){
-          let obj = {'name': response.data.voters[i],
-                     'comment': response.data.comments[i]};
-          this.eachVotes.push(obj);
-        }
-        this.isOpened = !this.isOpened
-      }).catch((e) => {
-        this.handleErrors({e : e, router : this.$router});
-      });
+          let dateStringArray = response.data.candidateDate;
+
+          for(let i = 0; i < dateStringArray.length; i++){
+            let obj = {'date': dateStringArray[i],
+                       'circleCount': this.voteCount[i][0],
+                       'triangleCount': this.voteCount[i][1],
+                       'crossCount': this.voteCount[i][2],
+                       'vote':this.attendance[i]
+                     };
+            this.candidateDate.push(obj);
+          }
+
+          for(let i = 0; i < response.data.voters.length; i++){
+            let obj = {'name': response.data.voters[i],
+                       'comment': response.data.comments[i]};
+            this.eachVotes.push(obj);
+          }
+
+          setTimeout(() => {
+            this.isFetchingEventData = false;
+            this.isAccordionOpened = !this.isAccordionOpened
+          }, 1000);
+
+        }).catch((e) => {
+          this.handleErrors({e : e, router : this.$router});
+          setTimeout(() => {
+            this.isFetchingEventData = false;
+          }, 1000);
+        });
+
+      }else{  //閉じるとき
+        this.isAccordionOpened = !this.isAccordionOpened
+      }
+
 
     },
     initialState: function(){
@@ -139,12 +165,6 @@ export default {
       this.voteCount = [];
       this.eventURL = '';
       this.eachVotes = [];
-    },
-    formatDate: function(date, format){
-      format = format.replace(/YYYY/, date.getFullYear());
-      format = format.replace(/MM/, date.getMonth()+1);
-      format = format.replace(/DD/, date.getDate());
-      return format;
     },
     enter: function(el){
       el.style.overflow = 'hidden';

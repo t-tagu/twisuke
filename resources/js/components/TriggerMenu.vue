@@ -51,14 +51,18 @@ let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
         twitterId: ''
       }
     },
-    mounted: function(){
+    created: function(){
       window.addEventListener('resize', this.handleResize);
-      this.handleResize();
-
+      this.handleResize()
+    },
+    mounted: function(){
       this.getAccountData(); //使用中のアカウントデータの取得
       eventBus.$on('toggle', active => { //メニュー表示・非表示切り替え
         this.active = active;
       });
+    },
+    destroyed: function(){
+      window.removeEventListener('resize', this.handleResize);
     },
     methods: {
       getAccountData: function(){

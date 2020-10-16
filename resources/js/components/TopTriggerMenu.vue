@@ -24,13 +24,17 @@ let OFFSET_BORDER = 720; //スクロールオフセットの切り替え
         offset: -80
       }
     },
-    mounted: function(){
+    created: function(){
       window.addEventListener('resize', this.handleResize);
       this.handleResize();
-
+    },
+    mounted: function(){
       eventBus.$on("toggleTopMenu", active => { //メニュー表示・非表示切り替え
         this.active = active;
       });
+    },
+    destroyed: function(){
+      window.removeEventListener('resize', this.handleResize);
     },
     methods: {
       clickTopMenuLink: function(){ //メニュー閉じる
