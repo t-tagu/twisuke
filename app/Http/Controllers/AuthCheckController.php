@@ -8,10 +8,15 @@ use Session;
 
 class AuthCheckController extends Controller
 {
+  /**
+  * 認証とセッションに保存したツイッターIDの取得のチェック
+  *
+  * @return JSON
+  */
   public function authCheck(){
 
     $auth = false;
-    if(Auth::check() && (!empty(Session::get('twitter_id'))) ){ //認証とセッションの取得のチェック
+    if(Auth::check() && (!empty(Session::get('twitter_id'))) ){
       $auth = true;
     }
     return json_encode(array('authStatus'=>$auth));

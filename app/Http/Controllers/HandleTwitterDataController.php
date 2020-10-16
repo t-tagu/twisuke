@@ -14,8 +14,9 @@ class HandleTwitterDataController extends Controller
 
     /**
     * ユーザー情報の登録、更新
+    * @param Request $request
     *
-    * @return json
+    * @return JSON
     */
     public function makeUserData(Request $request){
 

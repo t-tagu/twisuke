@@ -13,9 +13,9 @@ use Log;
 class SidebarController extends Controller
 {
     /**
-    * アカウントデータの取得
+    * ユーザーアカウントデータの取得
     *
-    * @return Collection
+    * @return JSON
     */
     public function getAccountData(){
 

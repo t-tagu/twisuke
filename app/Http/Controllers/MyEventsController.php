@@ -20,8 +20,9 @@ class MyEventsController extends Controller
 
     /**
     * ユーザーの存在チェック
+    * @param Request $request
     *
-    * @return json
+    * @return JSON
     */
     public function checkUserExist(Request $request){
 
@@ -37,6 +38,7 @@ class MyEventsController extends Controller
 
     /**
     * 作成したイベント一覧の取得
+    * @param Request $request
     *
     * @return Collection
     */
@@ -53,8 +55,9 @@ class MyEventsController extends Controller
 
     /**
     * イベントの詳細情報を取得
+    * @param Request $request
     *
-    * @return Collection
+    * @return JSON|void
     */
     public function getEventDetail(Request $request){
 
@@ -81,7 +84,6 @@ class MyEventsController extends Controller
 
       foreach($voteData as $data){
         array_push($twitterId, $data->twitter_id);
-        //array_push($voteDate, explode(",", $data->vote));
         array_push($voteDate, json_decode($data->vote));
         if(!empty($data->comment)){ //コメントを取得
           array_push($comment, $data->comment);

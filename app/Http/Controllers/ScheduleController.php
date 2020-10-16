@@ -23,8 +23,9 @@ class ScheduleController extends Controller
 
     /**
     * イベントの作成
+    * @param Request $request
     *
-    * @return Collection
+    * @return JSON
     */
     public function makeEvent(Request $request){
 
@@ -55,6 +56,7 @@ class ScheduleController extends Controller
 
     /**
     * ランダム文字列(イベントID)を作成
+    * @param int $length
     *
     * @return String
     */

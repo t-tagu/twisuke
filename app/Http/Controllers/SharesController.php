@@ -14,7 +14,7 @@ class SharesController extends Controller
   /**
   * DMの宛先(相互フォローの情報）を取得
   *
-  * @return Collection
+  * @return Collection|void
   */
   public function getFollower(){
 
@@ -95,8 +95,9 @@ class SharesController extends Controller
 
   /**
   * DMを送信する
+  * @param Request $request
   *
-  *
+  * @return void
   */
   public function sendMessage(Request $request){
 

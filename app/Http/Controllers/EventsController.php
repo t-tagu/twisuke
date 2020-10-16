@@ -21,18 +21,9 @@ class EventsController extends Controller
   const VOTE_OF_SANKAKU = 2;
 
   /**
-   * 出欠入力ページの表示
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-  */
-  public function index(){
-    return view('event');
-  }
-
-  /**
   * イベントデータ取得
   *
-  * @return json
+  * @return JSON|void
   */
   public function getEventData(Request $request){
 
@@ -67,7 +58,6 @@ class EventsController extends Controller
 
     foreach($voteData as $data){
       array_push($twitterIds, $data->twitter_id);
-      //array_push($voteDate, explode(",", $data->vote));
       array_push($voteDate, json_decode($data->vote));
       if(!empty($data->comment)){ //コメントを取得
         array_push($comment, $data->comment);
@@ -150,7 +140,10 @@ class EventsController extends Controller
   }
 
   /**
-  * スケジュール入力
+  * スケジュール入力の値を受け取り保存または上書き保存
+  * @param Request $request
+  *
+  * @return void
   */
   public function enterSchedule(Request $request){
 
