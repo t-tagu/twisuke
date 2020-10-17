@@ -17,7 +17,8 @@ class CreateVotesTable extends Migration
             $table->bigIncrements('id');
             $table->string('event_id');
             $table->string('twitter_id');
-            $table->json('vote');
+            //$table->json('vote');
+            $table->text('vote');
             $table->text('comment')->nullable();
             $table->tinyInteger('delete_flg')->default(1);
             $table->timestamps();
