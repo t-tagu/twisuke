@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     getFollower: function() { //DMの宛先を選択する(相互フォローを取得して渡す)
-      axios.get('/get_follower').then(response=> {
+      axios.get('/get_user_twitter_mutual_followers').then(response=> {
         this.follower = response.data;
         setTimeout(() => {
           this.isLoading = false;
@@ -156,7 +156,7 @@ export default {
 
       this.isSendingDM = true;
 
-      axios.post('/send_message',formData,{
+      axios.post('/send_direct_messages',formData,{
       }).then(response => {
         this.showFlashMessage('DMを送信しました。');
         this.isSendingDM = false;

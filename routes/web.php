@@ -11,36 +11,37 @@
 |
 */
 
-//ツイッターアカウントデータの登録
-Route::post('/make_user_data', 'HandleTwitterDataController@makeUserData');
+//ツイッターアカウントデータの登録または更新してログイン
+Route::post('/sign_up_or_sign_in', 'SignUpOrSignIn@singUpOrSingIn');
+
 //認証チェック
-Route::get('/auth_check', 'AuthCheckController@authCheck');
+Route::get('/auth_check', 'AuthCheck');
 
 //ヘッダーナビゲーションの処理
-Route::get('/get_id', 'HeaderNavigationController@getId');
+Route::get('/get_session_twitter_id', 'GetSessionTwitterId');
 
-//サイドバーの処理
-Route::get('/get_account_data', 'SidebarController@getAccountData');
+//ユーザーのツイッターのプロフの取り出し
+Route::get('/select_user_twitter_profile', 'SelectUserTwitterProfile');
 
-//イベント作成ページでの処理
-Route::post('/make_event', 'ScheduleController@makeEvent');
+//イベント作成
+Route::post('/make_event', 'MakeEvent@makeEvent');
+//スケジュールの投票
+Route::post('/vote_schedule', 'VoteSchedule@voteSchedule');
+//イベントの存在チェック
+Route::post('/check_event_exist', 'CheckEventExist@checkEventExist');
 
-//日程入力ページでの処理
-Route::post('/get_event_data', 'EventsController@getEventData');
-Route::post('/enter_schedule', 'EventsController@enterSchedule');
-Route::post('/check_event_exist', 'EventsController@checkEventExist');
+//ユーザーの相互フォロワーを取得
+Route::get('/get_user_twitter_mutual_followers', 'GetUserTwitterMutualFollowers');
+//ツイッターのDMを送信
+Route::post('/send_direct_messages', 'SendDirectMessages@sendDirectMessages');
+//作成したイベント一覧の取得
+Route::post('/select_my_event_list', 'SelectMyEventList@selectMyEventList');
+//選択したイベントの詳細情報の取得
+Route::post('/select_my_event_detail', 'SelectMyEventDetail@selectMyEventDetail');
+//ユーザーが存在しているかチェック
+Route::post('/check_user_exist', 'CheckUserExist@checkUserExist');
 
-//モーダルでの処理
-Route::get('/get_follower', 'SharesController@getFollower');
-Route::post('/send_message', 'SharesController@sendMessage');
-
-//作成イベント一覧での処理
-Route::post('/get_my_event_data', 'MyEventsController@getMyEventData');
-Route::post('/get_event_detail', 'MyEventsController@getEventDetail');
-Route::post('/check_user_exist', 'MyEventsController@checkUserExist');
-
-//ログアウト
-Route::get('/logout', 'LogoutController@getLogout');
+Route::get('/logout', 'LogoutController'); //ログアウト
 
 Route::get('/{any}', function () {
       return view('index');

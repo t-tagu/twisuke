@@ -34,7 +34,7 @@ import axios from 'axios';
     },
     methods: {
       getId: function(){
-        axios.get('/get_id').then(response=> {
+        axios.get('/get_session_twitter_id').then(response=> {
           this.twitterId = response.data.twitterId;
         }).catch((e) => {
           this.handleErrors({e : e, router : this.$router});

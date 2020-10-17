@@ -24,6 +24,18 @@
    }
 
    /**
+   * ランダム文字列(イベントID)を作成
+   * @param int $length
+   *
+   * @return String
+   */
+   public static function makeEventId($length = 32){
+     return array_reduce(range(1, $length), function($p){
+       return $p.str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz')[0];
+     });
+   }
+
+   /**
    * Twitter APIエラー時の処理
    * @param int $responseCode
    * @param TwitterOAuth $connection

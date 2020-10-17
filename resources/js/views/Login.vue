@@ -95,7 +95,7 @@ export default {
       let id = result.additionalUserInfo.profile.id_str;
       let user = result.user;
       if(user){
-        axios.post('/make_user_data',{
+        axios.post('/sign_up_or_sign_in',{
           accountName: result.additionalUserInfo.username,
           displayName: user.displayName,
           photoURL: user.photoURL,

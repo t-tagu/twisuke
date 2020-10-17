@@ -6,7 +6,7 @@
     <content-inner :title='title' v-show="!isLoading">
       <div class="p-event__container">
         <flash-message :value='flashMessage' :isShow="isFlashShow"></flash-message>
-        <form class="p-event__form" v-on:submit.prevent="enterSchedule">
+        <form class="p-event__form" v-on:submit.prevent="voteSchedule">
           <div class="p-event__title-container p-event__subcontainer">
             <h2 class="p-event__subtitle">イベント名</h2>
             <div class="p-event__name">{{ eventName }}</div>
@@ -177,8 +177,12 @@ export default {
   },
   methods: {
     getEventData: function(){ //イベントのデータを取得
-      axios.post('/get_event_data',{
-        eventId: this.event_id
+
+      let transitionFrom = 1;
+
+      axios.post('/select_my_event_detail',{
+        eventId: this.event_id,
+        transitionFrom: transitionFrom
       }).then(response=> {
 
         this.eventName = response.data.eventName;
@@ -226,7 +230,7 @@ export default {
       });
 
     },
-    enterSchedule: function(){
+    voteSchedule: function(){
 
       let formData = new FormData();
       formData.append('eventId',this.event_id);
@@ -238,7 +242,7 @@ export default {
         return;
       }
 
-      axios.post('/enter_schedule',formData,{
+      axios.post('/vote_schedule',formData,{
       }).then(response => {
         this.showFlashMessage('スケジュールを入力しました！');
       }).catch((e) => {

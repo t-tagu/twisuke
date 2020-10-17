@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getAccountData: function(){
-      axios.get('/get_account_data').then(response=> {
+      axios.get('/select_user_twitter_profile').then(response=> {
         this.icon = response.data.photoUrl;
         this.displayName = response.data.displayName;
         this.accountName = response.data.accountName;

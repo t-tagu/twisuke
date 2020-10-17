@@ -109,9 +109,12 @@ export default {
 
       if(!this.isAccordionOpened){ //開く時
 
+        let transitionFrom = 2;
+
         this.isFetchingEventData = true;
-        axios.post('/get_event_detail',{
-          eventId: this.eventId
+        axios.post('/select_my_event_detail',{
+          eventId: this.eventId,
+          transitionFrom: transitionFrom
         }).then(response => {
 
           this.initialState();

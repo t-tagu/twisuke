@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     getMyEventData: function(){ //イベントのデータを取得
-      axios.post('/get_my_event_data',{
+      axios.post('/select_my_event_list',{
         twitterId: this.twitter_id
       }).then(response=> {
         this.eventData = response.data;
