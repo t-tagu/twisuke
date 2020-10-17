@@ -85,7 +85,7 @@ export default {
         let that = this;
         firebase.auth().signInWithPopup(provider).then(function(result) {
           that.firebaseTwitterAuthentication(result);
-        }).catch(function(error) {
+        }).catch(function(e) {
           that.firebaseErrorMessage(e);
         });
       }
