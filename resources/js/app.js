@@ -25,7 +25,6 @@ import VSelect from 'vue-select';
 import VueClipboard from 'vue-clipboard2';
 import VueSmoothScroll from 'vue-smooth-scroll';
 import util from "./util";
-import firebase from "firebase";
 
 Vue.component('sidebar', require('./components/Sidebar.vue').default);
 Vue.component('header-navigation', require('./components/HeaderNavigation.vue').default);

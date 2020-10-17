@@ -26,7 +26,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-auth.js"></script>
 <script>
 import axios from 'axios';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 let POPUP_CLOSED = 'ポップアップが閉じられました。';
 let AUTH_REJECTED = '認証を拒否しました。';
