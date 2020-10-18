@@ -71,6 +71,7 @@
 import axios from 'axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import config from '../const';
 
 function nextFrame(fn){
   window.requestAnimationFrame(() => window.requestAnimationFrame(fn));
@@ -99,7 +100,7 @@ export default {
   },
   computed: {
     eventShareURL :function(){
-      return process.env.VUE_APP_URL+'/share/'+this.eventId;
+      return config.BASE_URL+'/share/'+this.eventId;
     }
   },
   methods: {
@@ -121,7 +122,8 @@ export default {
             this.explain = response.data.explain;
           }
           this.voteCount = response.data.vote;
-          this.eventURL = process.env.VUE_APP_URL+'/event/'+this.eventId;
+          this.eventURL = config.BASE_URL+'/event/'+this.eventId;
+          console.log(config.BASE_URL);
           this.attendance = response.data.attendance;
 
           let dateStringArray = response.data.candidateDate;

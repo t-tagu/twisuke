@@ -91,7 +91,7 @@ export default {
       return this.message.length;
     },
     eventURL :function(){
-      return process.env.VUE_APP_URL+'/event/'+this.event_id;
+      return config.BASE_URL+'/event/'+this.event_id;
     }
   },
   beforeRouteEnter: (to, from, next) => {
