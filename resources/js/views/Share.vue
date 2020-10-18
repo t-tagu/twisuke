@@ -91,7 +91,7 @@ export default {
       return this.message.length;
     },
     eventURL :function(){
-      return 'http://127.0.0.1:8000/event/'+this.event_id;
+      return process.env.VUE_APP_URL+'/event/'+this.event_id;
     }
   },
   beforeRouteEnter: (to, from, next) => {
