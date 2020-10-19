@@ -129,7 +129,7 @@ export default {
     },
     send: function(){ //DMを送信する
 
-      if(!this.selected.length){
+      if(!this.selected || !this.selected.length){
         alert('送信先を選択して下さい。');
         return;
       }
