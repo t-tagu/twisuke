@@ -50,7 +50,7 @@
             <span class="p-share__count">{{ charaCount }}/{{ messageMaxLength }}</span>
           </div>
         </div>
-        <button class="c-button p-share__button" v-on:click="send">DMを送信する</button>
+        <button class="c-button p-share__button" :disabled="isSendingDM" v-on:click="send">DMを送信する</button>
         <div class="p-share__time-box">
           <span class="p-share__time-attension">※DM送信には30秒前後かかる場合がございます。</span>
         </div>
@@ -128,6 +128,8 @@ export default {
       alert('URLをコピーに失敗しました。');
     },
     send: function(){ //DMを送信する
+
+      if(this.isSendingDM) return; //送信中は連投不可にする
 
       if(!this.selected || !this.selected.length){
         alert('送信先を選択して下さい。');

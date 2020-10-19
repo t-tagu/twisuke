@@ -49,9 +49,9 @@ class SendDirectMessages extends Controller
 
     if($resCode === config('twitter.response.Success')){
       foreach($res as $value){
-        $messa = $value->name."さん"."\n".$message;
+        $messageWithName = $value->name."さん"."\n".$message; //名前付きメッセージ
         $id = $value->id_str;
-        $array = array('id'=> $id, 'message'=>$message);
+        $array = array('id'=> $id, 'message'=>$messageWithName);
         array_push($destinationInfo, $array);
       }
     }else{
