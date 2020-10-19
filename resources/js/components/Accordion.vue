@@ -123,7 +123,6 @@ export default {
           }
           this.voteCount = response.data.vote;
           this.eventURL = config.BASE_URL+'/event/'+this.eventId;
-          console.log(config.BASE_URL);
           this.attendance = response.data.attendance;
 
           let dateStringArray = response.data.candidateDate;
