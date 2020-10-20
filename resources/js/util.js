@@ -35,7 +35,7 @@ let TO_LOGIN = '/login';
 
 export default {
   methods: {
-    handleErrors: function({e = null, router = null}){
+    handleErrors: function({e = null, router = null}){ //通常APIエラー処理
       var status = e.response.status;
       if(status == AUTHENTIC_STATUS){
         if(e.response.data.errors){
