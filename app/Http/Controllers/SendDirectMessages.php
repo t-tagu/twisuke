@@ -59,7 +59,8 @@ class SendDirectMessages extends Controller
       return;
     }
 
-    for($i = 0; $i < count($destinationInfo); $i++){
+    $destinationInfoCount = count($destinationInfo);
+    foreach($i = 0; $i < $destinationInfoCount; $i++){
       $data = array('event' => [
                      'type' => 'message_create',  // 固定値 (必須)
                      'message_create' => [
@@ -74,7 +75,11 @@ class SendDirectMessages extends Controller
       $res = $connection->post('direct_messages/events/new', $data, true);
       $resCode = $connection->getLastHttpCode(); //レスポンスコードを取得
       if($resCode === config('twitter.response.Success')){
-        sleep(3); //連投になりすぎないように3秒ほど間隔を空ける
+        if($i < $destinationInfoCount-1){
+          sleep(5); //連投になりすぎないように3秒ほど間隔を空ける
+        }else{
+          return; //最後のループ
+        }
       }else{
         Util::handleTwitterApiError($resCode, $connection);
         return;
