@@ -78,7 +78,7 @@ class GetUserTwitterMutualFollowers extends Controller
           foreach($profiles as $value){ //ユーザーのデータ(最大100件)を1つずつ展開
             $name = $value->name;
             $screenName = $value->screen_name;
-            $image = $value->profile_image_url;
+            $image = $value->profile_image_url_https;
             $id = $value->id_str;
             $array = array('name'=>$name, 'screenName'=>$screenName, 'image'=> $image, 'twitterId'=> $id);
             array_push($profileArray, $array);
