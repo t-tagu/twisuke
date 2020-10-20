@@ -42,7 +42,7 @@ class SendDirectMessages extends Controller
     $destinationInfo = array();
 
     $connection = new TwitterOAuth(config('apikey.api_key'), config('apikey.secret_key'), $accessToken, $accessTokenSecret);
-    $connection->setTimeouts(60,60); //タイムアウトの設定
+    $connection->setTimeouts(90,90); //タイムアウトの設定
 
     $res = $connection->get('users/lookup', array('user_id' => $request->destination)); //ツイッターユーザーのデータをまとめて取得
     $resCode = $connection->getLastHttpCode(); //レスポンスコードを取得
