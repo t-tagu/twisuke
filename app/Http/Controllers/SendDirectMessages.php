@@ -60,7 +60,7 @@ class SendDirectMessages extends Controller
     }
 
     $destinationInfoCount = count($destinationInfo);
-    foreach($i = 0; $i < $destinationInfoCount; $i++){
+    for($i = 0; $i < $destinationInfoCount; $i++){
       $data = array('event' => [
                      'type' => 'message_create',  // 固定値 (必須)
                      'message_create' => [
