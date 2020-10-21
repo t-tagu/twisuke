@@ -3,26 +3,6 @@
 /**
 * Foundation
 * ========================== */
-html, body {
-  width: 100%;
-  color: #555555;
-  font-size: 16px;
-  text-size-adjust: 100%;
-  line-height: 1.4;
-  letter-spacing: 1px;
-  font-family: 'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif; }
-
-a {
-  text-decoration: none;
-  color: #555555; }
-
-a:hover {
-  cursor: pointer; }
-
-img {
-  width: 100%;
-  vertical-align: bottom; }
-
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -44,7 +24,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font-family: inherit;
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
@@ -69,6 +49,26 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+html, body {
+  width: 100%;
+  color: #555555;
+  font-size: 16px;
+  text-size-adjust: 100%;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  font-family: 'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif; }
+
+a {
+  text-decoration: none;
+  color: #555555; }
+
+a:hover {
+  cursor: pointer; }
+
+img {
+  width: 100%;
+  vertical-align: bottom; }
 
 /**
 * Layout

@@ -8,9 +8,9 @@
     width: 100%;
     transition: all 0.2s ease-in;
     display: block;
-    font-size: 20px;
+    font-size: $font-size_2l;
     text-align: left;
-    padding: 20px;
+    padding: $space_m;
     outline: none;
     border: none;
     cursor: pointer;
@@ -25,7 +25,7 @@
       position: absolute;
       top: 50%;
       right: 1em;
-      margin-top: -5px;
+      margin-top: -$space_xxs;
       transition: all 0.2s ease-in;
     }
     &.state-open {
@@ -33,7 +33,7 @@
       text-decoration: none;
       &:after {
         transform:rotateX(180deg);
-        margin-top: -10px;
+        margin-top: -$space_xs;
       }
     }
     &:hover {
