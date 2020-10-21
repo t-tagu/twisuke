@@ -1,27 +1,27 @@
 .p-hero {
-  &__banar{
-    content: '';
-    width: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url("/image/hero.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-   // width: 100%;
-   // background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url("/image/hero.jpg");
-   // background-attachment: fixed;
-   // background-position: center;
-   // background-size: cover;
-   // background-repeat: no-repeat;
-   // height: 700px;
-   // display: flex;
-   // justify-content: center;
-   // align-items: center;
+  // &__banar{
+  //   content: '';
+  //   width: 100%;
+  //   background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url("/image/hero.jpg");
+  //   background-attachment: fixed;
+  //   background-position: center;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   height: 700px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+   width: 100%;
+   background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url("/image/hero.jpg");
+   background-attachment: fixed;
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 700px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
   &__container {
     width: $site-width;
     @include top-mq('ll'){
