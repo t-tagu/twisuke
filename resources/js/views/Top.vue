@@ -1,8 +1,7 @@
 <template>
   <div>
     <top-header></top-header>
-    <main class="l-main">
-      <div class="p-hero__banar">
+    <main class="l-main p-hero__banar">
         <section class="p-hero">
           <div class="p-hero__container">
             <div class="p-hero__content">
@@ -12,7 +11,6 @@
             </div>
           </div>
         </section>
-      </div>
       <div class="u-bg-white-color">
         <section class="p-top__container" id="about">
           <h2 class="p-top__container-title p-top__container-title--color">{{ appName }}とは何ですか？</h2>

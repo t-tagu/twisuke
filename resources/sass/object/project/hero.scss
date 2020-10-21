@@ -1,5 +1,5 @@
 .p-hero {
-   &__banar{
+   &__banar:before {
      content: '';
      width: 100%;
      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url("/image/hero.jpg");
