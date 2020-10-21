@@ -76,7 +76,7 @@ class SendDirectMessages extends Controller
       $resCode = $connection->getLastHttpCode(); //レスポンスコードを取得
       if($resCode === config('twitter.response.Success')){
         if($i < $destinationInfoCount-1){
-          sleep(5); //連投になりすぎないように3秒ほど間隔を空ける
+          sleep(2); //連投になりすぎないように3秒ほど間隔を空ける
         }else{
           return; //最後のループ
         }
