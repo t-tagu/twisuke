@@ -2,8 +2,14 @@
 <template>
   <nav class="p-top-trigger-menu" v-bind:class="{'p-top-trigger-menu--active': active }" v-if="isShow">
     <ul class="p-top-trigger-menu__list">
-      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset }">アプリ名とは</a></li>
-      <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset }">機能紹介</a></li>
+      <div v-show="isOffset80">
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset80 }">{{ appName }}</a></li>
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset80 }">{{ funcIntroduction }}</a></li>
+      </div>
+      <div v-show="!isOffset80">
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ appName }}2</a></li>
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ funcIntroduction }}2</a></li>
+      </div>
       <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="/login">ログイン</a></li>
     </ul>
   </nav>
@@ -18,10 +24,14 @@ let OFFSET_BORDER = 720; //スクロールオフセットの切り替え
   export default {
     data: function(){
       return {
+        appName: 'ツイ助とは',
+        funcIntroduction: '機能紹介',
         active: false,
         isShow: false,
         scrollDuration: 1000,
-        offset: -80
+        offset80: -80,
+        offset60: -60,
+        isOffset80: true
       }
     },
     created: function(){
@@ -49,9 +59,9 @@ let OFFSET_BORDER = 720; //スクロールオフセットの切り替え
         }
 
         if(window.innerWidth <= OFFSET_BORDER){
-          this.offset = -60;
+          this.isOffset80 = false;
         }else{
-          this.offset = -80;
+          this.isOffset80 = true;
         }
       }
     }

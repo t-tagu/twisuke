@@ -21,7 +21,7 @@
        position: 0,
        appName: 'ツイ助',
        scrollDuration: 1000,
-       offset: -60
+       offset: -80
      }
    },
    mounted: function() {
