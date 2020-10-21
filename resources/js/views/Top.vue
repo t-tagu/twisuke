@@ -2,15 +2,17 @@
   <div>
     <top-header></top-header>
     <main class="l-main">
-      <section class="p-hero">
-        <div class="p-hero__container">
-          <div class="p-hero__content">
-            <h2 class="p-hero__title">フォロワーとのスケジュール調整を<br class="p-hero__title--newline">ワンストップで</h2>
-            <p class="p-hero__description">{{ appName }}はツイッターのフォロワー間でのイベントや集まりのスケジュール調整を<br class="p-hero__description--newline">ワンストップでおこなうことができるウェブサービスです。</p>
-            <a class="p-hero__link" href="/login">{{ appName }}をすぐ使う</a>
+      <div class="p-hero__banar">
+        <section class="p-hero">
+          <div class="p-hero__container">
+            <div class="p-hero__content">
+              <h2 class="p-hero__title">フォロワーとのスケジュール調整を<br class="p-hero__title--newline">ワンストップで</h2>
+              <p class="p-hero__description">{{ appName }}はツイッターのフォロワー間でのイベントや集まりのスケジュール調整を<br class="p-hero__description--newline">ワンストップでおこなうことができるウェブサービスです。</p>
+              <a class="p-hero__link" href="/login">{{ appName }}をすぐ使う</a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       <div class="u-bg-white-color">
         <section class="p-top__container" id="about">
           <h2 class="p-top__container-title p-top__container-title--color">{{ appName }}とは何ですか？</h2>

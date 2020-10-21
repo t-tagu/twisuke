@@ -7,8 +7,8 @@
         <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset80 }">{{ funcIntroduction }}</a></li>
       </div>
       <div v-show="!isOffset80">
-        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ appName }}2</a></li>
-        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ funcIntroduction }}2</a></li>
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#about" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ appName }}</a></li>
+        <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="#feature" v-on:click="clickTopMenuLink" v-smooth-scroll="{ duration: scrollDuration, offset: offset60 }">{{ funcIntroduction }}</a></li>
       </div>
       <li class="p-top-trigger-menu__item"><a class="p-top-trigger-menu__link" href="/login">ログイン</a></li>
     </ul>
