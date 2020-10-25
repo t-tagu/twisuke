@@ -12,8 +12,8 @@
 ツイッターの相互フォロワー間のスケジュール調整を効率的におこなうサービスです。<br>
 イベント作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。<br>
 
-ページURL<br>
-https://twisuke.herokuapp.com/
+サイトURL : https://twisuke.herokuapp.com/
+
 
 # 使用フレームワークや言語、ツールなど
 
