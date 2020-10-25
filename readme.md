@@ -9,27 +9,27 @@
 
 # ツイ助
 
-ツイッターの相互フォロワー間のスケジュール調整を効率的におこなうサービスです。
-イベント作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。
+ツイッターの相互フォロワー間のスケジュール調整を効率的におこなうサービスです。<br>
+イベント作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。<br>
 
 # 使用フレームワークや言語、ツールなど
 
-Vue.js
-Laravel 5.8
-SASS
-javascript
-PHP
-HTML5
-CSS3
-WEBPACK
-Gulp
+Vue.js<br>
+Laravel 5.8<br>
+SASS<br>
+javascript<br>
+PHP<br>
+HTML5<br>
+CSS3<br>
+WEBPACK<br>
+Gulp<br>
            
 # 機能的特徴
 
-* SPAで作成
-* Vuexによるログイン状態管理
-* ツイッターアカウントログイン
-* TwitterAPIによるDM送信機能
+* SPAで作成<br>
+* Vuexによるログイン状態管理<br>
+* ツイッターアカウントログイン<br>
+* TwitterAPIによるDM送信機能<br>
 
 # 作成者
 
