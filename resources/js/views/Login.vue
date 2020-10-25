@@ -1,5 +1,5 @@
 <template>
-<div class="u-heightAdjust u-mainColor">
+  <div class="u-heightAdjust u-mainColor">
     <div class="c-container p-container">
       <div class="c-container__inner p-container__inner">
         <form class="c-form p-form" v-on:submit.prevent="login">
@@ -28,6 +28,8 @@
 import axios from 'axios';
 import firebase from "firebase/app";
 import "firebase/auth";
+import Firebase from '../firebase';
+import store from '../store';
 
 let POPUP_CLOSED = 'ポップアップが閉じられました。';
 let AUTH_REJECTED = '認証を拒否しました。';
@@ -38,18 +40,6 @@ let ERROR_OCCURED = 'エラーが発生しました。しばらく時間をお�
 let NOT_VALID_ACCOUNT = '有効なアカウントではありません。';
 let POPUP_WIDTH = 600; //twitter認証のポップアップとリダイレクトの境界線
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDj-gESxnJE9R9iLfNwZRDXV6eB_g633Y8",
-  authDomain: "twieve.firebaseapp.com",
-  databaseURL: "https://twieve.firebaseio.com",
-  projectId: "twieve",
-  storageBucket: "twieve.appspot.com",
-  messagingSenderId: "757104191968",
-  appId: "1:757104191968:web:1f6ff8252527f995f7e385",
-  measurementId: "G-ZGQTFHWXP1"
-};
-firebase.initializeApp(firebaseConfig);
-
 export default {
   data: function(){
     return{
@@ -57,13 +47,11 @@ export default {
     }
   },
   beforeRouteEnter: (to, from, next) => {
-    axios.get('/auth_check').then(response=> { //認証済みならイベント作成画面へ
-      if(response.data.authStatus){
-        next('/schedule');
-      }else{
-        next();
-      }
-    });
+    if(store.getters.isSignedIn){
+      next('/schedule');
+    }else{
+      next();
+    }
   },
   mounted: function(){
     //リダイレクトしてログインをした場合、次にページが読み込まれた時に認証処理をおこなう
@@ -91,20 +79,29 @@ export default {
       }
     },
     firebaseTwitterAuthentication: function(result){ //firebaseのtwitter認証の結果
-      let token = result.credential.accessToken;
-      let secret = result.credential.secret;
-      let id = result.additionalUserInfo.profile.id_str;
       let user = result.user;
       if(user){
-        axios.post('/sign_up_or_sign_in',{
-          accountName: result.additionalUserInfo.username,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
+        let token = result.credential.accessToken;
+        let secret = result.credential.secret;
+        let twitterId = user.providerData[0].uid;
+        const userInfo = {
+            'displayName': user.displayName,
+            'photoURL': user.photoURL,
+            'twitterId': twitterId
+        }
+        const isSignedIn = user.uid ? true : false;
+
+        store.commit('setUserInfo', userInfo);
+        store.commit('setUserLoginStatus', isSignedIn);
+
+        axios.post('/sign_up',{
+          twitterIdStr: twitterId,
           accessToken: token,
-          accessTokenSecret: secret,
-          twitterIdStr: id
-        }).then(response => { //ツイッターログイン完了
-          this.$router.push('/schedule');
+          accessTokenSecret: secret
+        }).then(response => {
+          if(store.getters.isSignedIn){
+            this.$router.go('/schedule');
+          }
         }).catch((e) => { //エラー処理
           this.handleErrors({e : e, router : this.$router});
         });

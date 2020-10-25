@@ -14,9 +14,13 @@ class GetUserTwitterMutualFollowers extends Controller
     *
     * @return Collection|void
     */
-    public function __invoke(){
+    public function getUserTwitterMutualFollowers(Request $request){
 
-      $twitterId = Util::getTwitterId();
+      $request->validate([
+        'twitterId' => 'required|string',
+      ]);
+
+      $twitterId = $request->twitterId;
 
       $accessToken = '';
       $accessTokenSecret = '';

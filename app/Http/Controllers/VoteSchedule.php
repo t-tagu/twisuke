@@ -17,13 +17,13 @@ class VoteSchedule extends Controller
   public function voteSchedule(Request $request){
 
     $request->validate([
+      'twitterId' => 'required|string',
       'eventId' => 'required|string',
       'submissionDate' => 'required|json',
       'comment' => 'nullable|string'
     ]);
 
-    $twitterId = Util::getTwitterId();
-
+    $twitterId = $request->twitterId;
     $eventId = $request->eventId;
     $submissionDate = $request->submissionDate;
     $comment = $request->comment;

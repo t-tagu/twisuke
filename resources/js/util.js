@@ -41,13 +41,13 @@ export default {
         if(e.response.data.errors){
             alert(AUTHENTIC_ERROR_MESSAGE);
             if(!router){
-              router.push(TO_LOGIN);
+              router.go(TO_LOGIN);
             }
         }else{
           if(e.response.data.message){ //セッション切れでツイッターIDが取得できないときに意図的にエラーをだす。
             alert(e.response.data.message);
             if(!router){
-              router.push(TO_LOGIN);
+              router.go(TO_LOGIN);
             }
           }
         }
@@ -55,19 +55,19 @@ export default {
       }else if(status == VALIDATION_STATUS){
         alert(VALIDATION_ERROR_MESSAGE);
         if(!router){
-          router.push(TO_LOGIN);
+          router.go(TO_LOGIN);
         }
         return;
       }else if(status == SERVER_STATUS){
         alert(SERVER_ERROR_MESSAGE);
         if(!router){
-          router.push(TO_LOGIN);
+          router.go(TO_LOGIN);
         }
         return;
       }else{
         alert(UNEXPECTED_ERROR_MESSAGE);
         if(!router){
-          router.push(TO_LOGIN);
+          router.go(TO_LOGIN);
         }
         return;
       }

@@ -9,12 +9,14 @@
         <router-link class="p-header__menu-link" :to="{ name: 'my_event', params: { twitter_id: twitterId } }">作成イベント確認</router-link>
       </li>
     </ul>
-    <a class="p-header__logout" href="/logout">ログアウト</a>
+    <a class="p-header__logout" @click.prevent.stop='logout()'>ログアウト</a>
   </nav>
 </template>
 
 <script>
 import axios from 'axios';
+import store from '../store';
+import Firebase from '../firebase';
 
   const names = [
     { id:1, routeName: 'schedule', name: 'イベント作成'},
@@ -26,19 +28,17 @@ import axios from 'axios';
     data: function() {
       return {
         names: names,
-        twitterId: ''
       }
     },
-    created(){
-      this.getId();
+    computed: {
+      twitterId: function() {
+        return store.getters.user.twitterId;
+      }
     },
     methods: {
-      getId: function(){
-        axios.get('/get_session_twitter_id').then(response=> {
-          this.twitterId = response.data.twitterId;
-        }).catch((e) => {
-          this.handleErrors({e : e, router : this.$router});
-        });
+      logout: function(){
+        Firebase.logout();
+        this.$router.go('/login');
       }
     }
   }

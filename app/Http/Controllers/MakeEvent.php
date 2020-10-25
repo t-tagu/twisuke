@@ -10,16 +10,7 @@ use App\Utils\Util;
 
 class MakeEvent extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+  
     /**
     * イベントの作成
     * @param Request $request
@@ -29,6 +20,7 @@ class MakeEvent extends Controller
     public function makeEvent(Request $request){
 
       $request->validate([
+        'twitterId' => 'required|string',
         'name' => 'required|string',
         'explain' => 'nullable|string',
         'candidateDate' => 'required|string'
@@ -36,7 +28,7 @@ class MakeEvent extends Controller
 
       $event = new Event;
 
-      $twitterId = Util::getTwitterId();
+      $twitterId = $request->twitterId;
       $name = $request->name;
       $explain = $request->explain;
       $candidateDate = $request->candidateDate;

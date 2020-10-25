@@ -24,6 +24,7 @@
 import axios from 'axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import store from '../store';
 
 export default {
   components: {
@@ -39,38 +40,31 @@ export default {
       isLoading: true
     }
   },
-  props: {
-    twitter_id: String
-  },
   created: function() {
     this.getMyEventData();
   },
   beforeRouteEnter: (to, from, next) => {
-    axios.get('/auth_check').then(response=> { //認証チェック
-      if(response.data.authStatus){
-        next();
-
-        axios.post('/check_user_exist',{ //ユーザーページの存在チェック
-          twitterId: to.params.twitter_id
-        }).then((response) => {
-          if(response.data.isUserExist){
-            next();
-          }else{
-            next({path: '/404'});
-          }
-        }).catch((e) => {
-          this.handleErrors({e : e, router : null });
-        });
-
-      }else{
-        next('/login');
-      }
-    });
+    if(store.getters.isSignedIn){
+      next();
+      axios.post('/check_user_exist',{ //ユーザーページの存在チェック
+        twitterId: to.params.twitter_id
+      }).then((response) => {
+        if(response.data.isUserExist){
+          next();
+        }else{
+          next({path: '/404'});
+        }
+      }).catch((e) => {
+        this.handleErrors({e : e, router : null });
+      });
+    }else{
+      next('/login');
+    }
   },
   methods: {
     getMyEventData: function(){ //イベントのデータを取得
       axios.post('/select_my_event_list',{
-        twitterId: this.twitter_id
+        twitterId: store.getters.user.twitterId
       }).then(response=> {
         this.eventData = response.data;
         setTimeout(() => {

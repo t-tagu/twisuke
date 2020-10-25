@@ -52,6 +52,7 @@ import Datepicker from 'vuejs-datepicker';
 import {ja} from 'vuejs-datepicker/dist/locale';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import store from '../store';
 
 let ENTER_EVENT_NAME = 'イベントの名前を入力して下さい。';
 
@@ -69,13 +70,11 @@ export default {
     },
   },
   beforeRouteEnter: (to, from, next) => {
-    axios.get('/auth_check').then(response=> { //認証済みならイベント作成画面へ
-      if(response.data.authStatus){
-        next();
-      }else{
-        next('/login');
-      }
-    });
+    if(store.getters.isSignedIn){
+      next();
+    }else{
+      next('/login');
+    }
   },
   created: function(){
     window.addEventListener('resize', this.handleResize);
@@ -138,6 +137,7 @@ export default {
       }
 
       let formData = new FormData();
+      formData.append('twitterId',store.getters.user.twitterId);
       formData.append('name',eventName);
       formData.append('explain',this.explain);
       formData.append('candidateDate',JSON.stringify((this.candidateDate.trim()).split(/\n/)));

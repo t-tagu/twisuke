@@ -24,7 +24,8 @@ import VCalendar from 'v-calendar';
 import VSelect from 'vue-select';
 import VueClipboard from 'vue-clipboard2';
 import VueSmoothScroll from 'vue-smooth-scroll';
-import util from "./util";
+import util from './util';
+import store from './store';
 
 Vue.component('sidebar', require('./components/Sidebar.vue').default);
 Vue.component('header-navigation', require('./components/HeaderNavigation.vue').default);
@@ -81,6 +82,29 @@ const router = new VueRouter({
   routes
 });
 
-const app = new Vue({
-  router
-}).$mount('#app');
+import Firebase from './firebase';
+import firebase from "firebase/app";
+import "firebase/auth";
+Firebase.init();
+
+firebase.auth().onAuthStateChanged(user => {
+
+  var userInfo = {};
+  var isSignedIn = false;
+  if(user){
+    userInfo = {
+        'displayName': user.displayName,
+        'photoURL': user.photoURL,
+        'twitterId': user.providerData[0].uid
+    }
+    isSignedIn = true;
+  }
+  store.commit('setUserInfo', userInfo);
+  store.commit('setUserLoginStatus', isSignedIn);
+
+  const app = new Vue({
+    router,
+    store
+  }).$mount('#app');
+
+});

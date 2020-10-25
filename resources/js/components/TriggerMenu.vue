@@ -6,11 +6,10 @@
         <div class="p-menu__account-item-inner">
           <div class="p-menu__profile-container">
             <div class="p-menu__icon-container">
-              <img class="p-menu__icon" :src="img">
+              <img class="p-menu__icon" :src="photoURL">
             </div>
             <div class="p-menu__name-container">
               <span class="p-menu__display-name">{{ displayName }}</span>
-              <span class="p-menu__account-name">@{{ accountName }}</span>
             </div>
           </div>
         </div>
@@ -28,7 +27,7 @@
         </router-link>
       </li>
       <li class="p-menu__item">
-        <a class="p-menu__link" href="/logout">ログアウト</a>
+        <a class="p-menu__link" @click.prevent.stop='logout()'>ログアウト</a>
       </li>
     </ul>
   </nav>
@@ -37,6 +36,8 @@
 <script>
 import axios from 'axios';
 import { eventBus } from '../app';
+import store from '../store';
+import Firebase from '../firebase';
 
 let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
 
@@ -44,19 +45,25 @@ let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
     data: function(){
       return {
         active: false,
-        isShow: false,
-        accountName: '',
-        displayName: '',
-        img: '',
-        twitterId: ''
+        isShow: false
       }
+    },
+    computed: {
+      twitterId: function() {
+        return store.getters.user.twitterId;
+      },
+      displayName: function() {
+        return store.getters.user.displayName;
+      },
+      photoURL: function() {
+        return store.getters.user.photoURL;
+      },
     },
     created: function(){
       window.addEventListener('resize', this.handleResize);
       this.handleResize()
     },
     mounted: function(){
-      this.getAccountData(); //使用中のアカウントデータの取得
       eventBus.$on('toggle', active => { //メニュー表示・非表示切り替え
         this.active = active;
       });
@@ -65,16 +72,6 @@ let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
       window.removeEventListener('resize', this.handleResize);
     },
     methods: {
-      getAccountData: function(){
-        axios.get('/select_user_twitter_profile').then(response => {
-          this.accountName = response.data.accountName;
-          this.displayName = response.data.displayName;
-          this.img = response.data.photoUrl;
-          this.twitterId = response.data.twitterId;
-        }).catch((e) => {
-          this.handleErrors({e : e, router : this.$router});
-        });
-      },
       clickLink: function(){
         this.active = false;
         eventBus.$emit('clickLink', false);
@@ -85,6 +82,10 @@ let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
         }else{
           this.isShow = false;
         }
+      },
+      logout: function(){
+        Firebase.logout();
+        this.$router.go('/login');
       }
     }
   }

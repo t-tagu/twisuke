@@ -8,22 +8,6 @@
  class Util { //共通処理クラス
 
    /**
-   * ツイッターIDを取得、取得失敗ならログアウトする
-   *
-   * @return String|void
-   */
-   public static function getTwitterId(){
-     if(!empty(Session::get('twitter_id'))){
-       return Session::get('twitter_id');
-     }else{
-       Session::flush();
-       Auth::logout();
-       abort(401,'セッション情報の取得に失敗しました。ログイン画面に遷移します。');
-       return;
-     }
-   }
-
-   /**
    * ランダム文字列(イベントID)を作成
    * @param int $length
    *

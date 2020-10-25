@@ -7,7 +7,8 @@
       <flash-message :value='flashMessage' :isShow="isFlashShow"></flash-message>
       <loading :active.sync="isSendingDM"
             :can-cancel="false"
-            :is-full-page="true"></loading>
+            :is-full-page="true"
+            :z-index="15"></loading>
       <div class="p-share__container">
         <div class="p-share__title-container p-share__subcontainer">
           <h2 class="p-share__subtitle">スケジュール入力URL</h2>
@@ -64,6 +65,7 @@ import axios from 'axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import config from '../const';
+import store from '../store';
 
 export default {
   name: 'Share',
@@ -96,20 +98,22 @@ export default {
     }
   },
   beforeRouteEnter: (to, from, next) => {
-    axios.get('/auth_check').then(response=> { //認証済みならイベント作成画面へ
-      if(response.data.authStatus){
-        next();
-      }else{
-        next('/login');
-      }
-    });
+    if(store.getters.isSignedIn){
+      next();
+    }else{
+      next('/login');
+    }
   },
   mounted: function() {
     this.getFollower();
   },
   methods: {
     getFollower: function() { //DMの宛先を選択する(相互フォローを取得して渡す)
-      axios.get('/get_user_twitter_mutual_followers').then(response=> {
+
+      let formData = new FormData();
+      formData.append('twitterId',store.getters.user.twitterId);
+      axios.post('/get_user_twitter_mutual_followers',formData,{
+      }).then(response=> {
         this.follower = response.data;
         setTimeout(() => {
           this.isLoading = false;
@@ -152,6 +156,7 @@ export default {
       }
 
       let formData = new FormData();
+      formData.append('twitterId',store.getters.user.twitterId);
       formData.append('message',this.message);
       formData.append('destination',this.selected.join(','));
 

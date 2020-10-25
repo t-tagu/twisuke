@@ -21,13 +21,14 @@ class SendDirectMessages extends Controller
   public function sendDirectMessages(Request $request){
 
     $request->validate([
+      'twitterId' => 'required|string',
       'message' => 'required|string',
       'destination' => 'required|string'
     ]);
 
     $message = $request->message;
 
-    $twitterId = Util::getTwitterId();
+    $twitterId = $request->twitterId;
 
     $accessToken = '';
     $accessTokenSecret = '';

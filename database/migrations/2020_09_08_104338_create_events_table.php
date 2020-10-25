@@ -19,7 +19,6 @@ class CreateEventsTable extends Migration
             $table->string('twitter_id');
             $table->string('name');
             $table->text('explain')->nullable();
-            //$table->json('candidate_schedule');
             $table->text('candidate_schedule');
             $table->string('url');
             $table->tinyInteger('delete_flg')->default(1);

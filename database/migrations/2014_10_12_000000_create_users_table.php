@@ -16,9 +16,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('twitter_id');
-            $table->string('account_name');
-            $table->string('display_name');
-            $table->string('photo_url');
             $table->string('access_token');
             $table->string('access_token_secret');
             $table->tinyInteger('delete_flg')->default(1);

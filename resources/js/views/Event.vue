@@ -110,6 +110,7 @@
 import axios from 'axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import store from '../store';
 
 let NOT_FOUND = 404; //ページが存在しない場合
 
@@ -154,26 +155,22 @@ export default {
     this.getEventData();
   },
   beforeRouteEnter: (to, from, next) => {
-    axios.get('/auth_check').then(response=> { //認証チェック
-      if(response.data.authStatus){
-        next();
-
-        axios.post('/check_event_exist',{ //イベントの存在チェック
-          eventId: to.params.event_id
-        }).then((response) => {
-          if(response.data.isEventExist){
-            next();
-          }else{
-            next({path:'/404'});
-          }
-        }).catch((e) => {
-          this.handleErrors({e : e, router : null});
-        });
-
-      }else{ //認証できなかった場合
-        next('/login');
-      }
-    });
+    if(store.getters.isSignedIn){
+      next();
+      axios.post('/check_event_exist',{ //イベントの存在チェック
+        eventId: to.params.event_id
+      }).then((response) => {
+        if(response.data.isEventExist){
+          next();
+        }else{
+          next({path:'/404'});
+        }
+      }).catch((e) => {
+        this.handleErrors({e : e, router : null});
+      });
+    }else{
+      next('/login');
+    }
   },
   methods: {
     getEventData: function(){ //イベントのデータを取得
@@ -233,6 +230,7 @@ export default {
     voteSchedule: function(){
 
       let formData = new FormData();
+      formData.append('twitterId',store.getters.user.twitterId);
       formData.append('eventId',this.event_id);
       formData.append('submissionDate',JSON.stringify(this.submissionDate));
       formData.append('comment',this.comment);
