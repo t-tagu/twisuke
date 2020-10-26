@@ -31,6 +31,7 @@ Gulp<br>
 
 * SPAで作成<br>
 * Vuexによるログイン状態管理<br>
+* レスポンシブ対応<br>
 * ツイッターアカウントログイン<br>
 * TwitterAPIによるDM送信機能<br>
 
