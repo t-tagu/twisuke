@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import store from './store';
 
-let MAX_SHOW_POPUP_WIDTH = 600;
+const MAX_SHOW_POPUP_WIDTH = 600;
 
 const config = {
   apiKey: "AIzaSyDj-gESxnJE9R9iLfNwZRDXV6eB_g633Y8",

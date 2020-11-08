@@ -21,10 +21,10 @@ import store from '../store';
 export default {
   name: 'Sidebar',
   computed: {
-    displayName: function() {
+    displayName(){
       return store.getters.user.displayName;
     },
-    photoURL: function() {
+    photoURL(){
       return store.getters.user.photoURL;
     },
   }

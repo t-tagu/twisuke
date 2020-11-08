@@ -11,20 +11,21 @@ import { eventBus } from '../app';
 
 export default {
   name: 'MenuTrigger',
-  data: function(){
+  data(){
     return {
       active: false
     }
   },
-  mounted: function(){
-    eventBus.$on('clickLink', active => { //メニュー非表示
+  mounted(){
+    //メニュー非表示、TriggerMenuのclickLinkをlistenさせる
+    eventBus.$on('clickLink', (active) => {
       this.active = active;
     });
   },
   methods: {
-    toggle: function(){
+    toggle(){
       this.active = !this.active;
-      eventBus.$emit('toggle', this.active);
+      eventBus.$emit('toggle', this.active); //メニューの開閉の状態をメニューの開閉に合わせるて伝える
     }
   }
 }

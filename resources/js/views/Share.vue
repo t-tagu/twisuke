@@ -67,12 +67,15 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import config from '../const';
 import store from '../store';
 
+const LOADING_DELAY_TIME = 1000;
+const FLASH_MESSAGE_SHOW_TIME = 3000;
+
 export default {
   name: 'Share',
   components: {
     Loading
   },
-  data: function(){
+  data(){
     return {
       title: 'イベント共有',
       follower: [],
@@ -90,10 +93,10 @@ export default {
     event_id: String
   },
   computed: {
-    charaCount: function() {
+    charaCount(){
       return this.message.length;
     },
-    eventURL :function(){
+    eventURL(){
       return config.BASE_URL+'/event/'+this.event_id;
     }
   },
@@ -104,34 +107,34 @@ export default {
       next('/login');
     }
   },
-  mounted: function() {
+  mounted(){
     this.getFollower();
   },
   methods: {
-    getFollower: function() { //DMの宛先を選択する(相互フォローを取得して渡す)
+    getFollower(){ //DMの宛先を選択する(相互フォローを取得して渡す)
 
       let formData = new FormData();
       formData.append('twitterId',store.getters.user.twitterId);
       axios.post('/get_user_twitter_mutual_followers',formData,{
-      }).then(response=> {
+      }).then((response) => {
         this.follower = response.data;
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
       }).catch((e) => {
         this.handleErrors({e : e, router : this.$router});
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
       });
     },
-    onCopy: function(e) {
+    onCopy(e){
       alert('URLをコピーしました。');
     },
-    onError: function(e) {
+    onError(e){
       alert('URLをコピーに失敗しました。');
     },
-    send: function(){ //DMを送信する
+    send(){ //DMを送信する
 
       if(this.isSendingDM) return; //送信中は連投不可にする
 
@@ -165,7 +168,7 @@ export default {
       this.isSendingDM = true;
 
       axios.post('/send_direct_messages',formData,{
-      }).then(response => {
+      }).then((response) => {
         this.showFlashMessage('DMを送信しました。');
         this.isSendingDM = false;
       }).catch((e) => {
@@ -174,14 +177,14 @@ export default {
       });
 
     },
-    showFlashMessage: function(message){
+    showFlashMessage(message){
       this.isFlashShow = true;
       this.flashMessage = message;
 
       let that = this;
-      setTimeout(function() {
+      setTimeout(() => {
         that.isFlashShow = false;
-      }, 3000);
+      }, FLASH_MESSAGE_SHOW_TIME);
 
     }
   }

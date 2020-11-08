@@ -19,7 +19,7 @@
   &__container {
     position: absolute;
     width: 580px;
-    top: $space_xl;
+    top: $space_l;
     left: 50%;
     transform: translateX(-50%);
     background-color: $color_white;
@@ -37,7 +37,7 @@
     font-weight: $font_weight_xs;
   }
   &__content {
-    padding: 0 $space_xl;
+    padding: 0 $space_l;
   }
   &__cancel {
     margin: $space_m $space_xs 0 0;
@@ -56,7 +56,7 @@
   &__button-wrapper {
     display: flex;
     justify-content: flex-end;
-    padding: $space_m $space_xl;
+    padding: $space_m $space_l;
   }
   &__button {
     font-size: $font-size_xxs;

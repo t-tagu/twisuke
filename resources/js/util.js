@@ -21,15 +21,14 @@ export function getCookieValue(searchKey){
   }
 }
 
-let AUTHENTIC_STATUS = 401;
-let VALIDATION_STATUS = 422;
-let SERVER_STATUS = 500;
-
-let AUTHENTIC_ERROR_MESSAGE = '認証エラーが発生いたしました。ログインし直して下さい。';
-let VALIDATION_ERROR_MESSAGE = 'パラメータエラーが発生いたしました。';
-let SERVER_ERROR_MESSAGE = 'サーバーエラーが発生いたしました。';
-let UNEXPECTED_ERROR_MESSAGE = '予期せぬエラーが発生いたしました。';
-let TO_LOGIN = '/login';
+const AUTHENTIC_STATUS = 401;
+const VALIDATION_STATUS = 422;
+const SERVER_STATUS = 500;
+const AUTHENTIC_ERROR_MESSAGE = '認証エラーが発生いたしました。ログインし直して下さい。';
+const VALIDATION_ERROR_MESSAGE = 'パラメータエラーが発生いたしました。';
+const SERVER_ERROR_MESSAGE = 'サーバーエラーが発生いたしました。';
+const UNEXPECTED_ERROR_MESSAGE = '予期せぬエラーが発生いたしました。';
+const TO_LOGIN = '/login';
 
 //グローバルメソッド
 

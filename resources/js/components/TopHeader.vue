@@ -16,7 +16,7 @@
 <script>
  export default {
    name: 'TopHeader',
-   data: function() {
+   data() {
      return {
        position: 0,
        appName: 'ツイ助',
@@ -24,10 +24,10 @@
        offset: -80
      }
    },
-   mounted: function() {
-     let self = this;
-     document.onscroll = function(e){
-       self.position = document.documentElement.scrollTop || document.body.scrollTop;
+   mounted() {
+     const that = this;
+     document.onscroll = (e) => {
+       that.position = document.documentElement.scrollTop || document.body.scrollTop;
      }
    }
  }

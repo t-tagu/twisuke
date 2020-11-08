@@ -24,7 +24,7 @@
 
 export default {
   name: 'Member',
-  data: function(){
+  data(){
     return{
       appName: 'ツイ助'
     }

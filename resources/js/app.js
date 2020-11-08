@@ -87,10 +87,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 Firebase.init();
 
-firebase.auth().onAuthStateChanged(user => {
-
-  var userInfo = {};
-  var isSignedIn = false;
+firebase.auth().onAuthStateChanged((user) => {
+  let userInfo = {};
+  let isSignedIn = false;
   if(user){
     userInfo = {
         'displayName': user.displayName,

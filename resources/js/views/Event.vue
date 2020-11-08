@@ -112,13 +112,15 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import store from '../store';
 
-let NOT_FOUND = 404; //ページが存在しない場合
+const NOT_FOUND = 404; //ページが存在しない場合
+const LOADING_DELAY_TIME = 1000;
+const FLASH_MESSAGE_SHOW_TIME = 3000;
 
 export default {
   components: {
     Loading
   },
-  data: function(){
+  data(){
     return{
       title: 'スケジュール入力',
       eventName: '',
@@ -144,14 +146,14 @@ export default {
     event_id: String
   },
   computed: {
-    secretaryURL :function(){
+    secretaryURL(){
       return 'https://twitter.com/'+this.account;
     },
-    commentCount: function() {
+    commentCount(){
       return this.comment.length;
     }
   },
-  created: function() {
+  created(){
     this.getEventData();
   },
   beforeRouteEnter: (to, from, next) => {
@@ -173,14 +175,14 @@ export default {
     }
   },
   methods: {
-    getEventData: function(){ //イベントのデータを取得
+    getEventData(){ //イベントのデータを取得
 
-      let transitionFrom = 1;
+      const transitionFrom = { fromEventPage : 1 };
 
       axios.post('/select_my_event_detail',{
         eventId: this.event_id,
-        transitionFrom: transitionFrom
-      }).then(response=> {
+        transitionFrom: transitionFrom.fromEventPage
+      }).then((response) => {
 
         this.eventName = response.data.eventName;
         if(response.data.explain){
@@ -217,17 +219,17 @@ export default {
 
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
 
       }).catch((e) => {
         this.handleErrors({e : e, router : this.$router});
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
       });
 
     },
-    voteSchedule: function(){
+    voteSchedule(){
 
       let formData = new FormData();
       formData.append('twitterId',store.getters.user.twitterId);
@@ -241,24 +243,24 @@ export default {
       }
 
       axios.post('/vote_schedule',formData,{
-      }).then(response => {
+      }).then((response) => {
         this.showFlashMessage('スケジュールを入力しました！');
       }).catch((e) => {
         this.handleErrors({e : e, router : this.$router});
       });
 
     },
-    onSubmissionDayChange: function(event){ //提出日の変更
+    onSubmissionDayChange(event){ //提出日の変更
       this.submissionDate.splice(event.target.name, 1, Number(event.target.value));
     },
-    showFlashMessage: function(message){
+    showFlashMessage(message){
       this.isFlashShow = true;
       this.flashMessage = message;
 
       let that = this;
-      setTimeout(function() {
+      setTimeout(() => {
         that.isFlashShow = false;
-      }, 3000);
+      }, FLASH_MESSAGE_SHOW_TIME);
 
     }
   }

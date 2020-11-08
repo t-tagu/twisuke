@@ -18,29 +18,28 @@ import axios from 'axios';
 import store from '../store';
 import Firebase from '../firebase';
 
-  const names = [
-    { id:1, routeName: 'schedule', name: 'イベント作成'},
-    { id:2, routeName: 'my_event', name: '作成イベント確認'}
-  ];
+const names = [
+  { id:1, routeName: 'schedule', name: 'イベント作成'},
+  { id:2, routeName: 'my_event', name: '作成イベント確認'}
+];
 
-  export default {
-    name: 'HeaderNavigation',
-    data: function() {
-      return {
-        names: names,
-      }
-    },
-    computed: {
-      twitterId: function() {
-        return store.getters.user.twitterId;
-      }
-    },
-    methods: {
-      logout: function(){
-        Firebase.logout();
-        this.$router.go('/login');
-      }
+export default {
+  name: 'HeaderNavigation',
+  data() {
+    return {
+      names: names,
+    }
+  },
+  computed: {
+    twitterId() {
+      return store.getters.user.twitterId;
+    }
+  },
+  methods: {
+    logout(){
+      Firebase.logout();
+      this.$router.go('/login');
     }
   }
-
+}
 </script>

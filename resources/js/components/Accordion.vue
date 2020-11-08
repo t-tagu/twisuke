@@ -73,15 +73,17 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import config from '../const';
 
-function nextFrame(fn){
+const LOADING_DELAY_TIME = 1000;
+
+const nextFrame = (fn) => {
   window.requestAnimationFrame(() => window.requestAnimationFrame(fn));
-}
+};
 
 export default {
   components: {
     Loading
   },
-  data: function(){
+  data(){
     return{
       isAccordionOpened: false,
       explain: '説明はありません',
@@ -99,22 +101,22 @@ export default {
     eventId: {type: String, required: true}
   },
   computed: {
-    eventShareURL :function(){
+    eventShareURL(){
       return config.BASE_URL+'/share/'+this.eventId;
     }
   },
   methods: {
-    toggle: function(){
+    toggle(){
 
       if(!this.isAccordionOpened){ //開く時
 
-        let transitionFrom = 2;
+        const transitionFrom = { fromMyEventPage : 2 };
 
         this.isFetchingEventData = true;
         axios.post('/select_my_event_detail',{
           eventId: this.eventId,
-          transitionFrom: transitionFrom
-        }).then(response => {
+          transitionFrom: transitionFrom.fromMyEventPage
+        }).then((response) => {
 
           this.initialState();
 
@@ -146,47 +148,46 @@ export default {
           setTimeout(() => {
             this.isFetchingEventData = false;
             this.isAccordionOpened = !this.isAccordionOpened
-          }, 1000);
+          }, LOADING_DELAY_TIME);
 
         }).catch((e) => {
           this.handleErrors({e : e, router : this.$router});
           setTimeout(() => {
             this.isFetchingEventData = false;
-          }, 1000);
+          }, LOADING_DELAY_TIME);
         });
 
       }else{  //閉じるとき
         this.isAccordionOpened = !this.isAccordionOpened
       }
 
-
     },
-    initialState: function(){
+    initialState(){
       this.explain = '説明はありません';
       this.candidateDate = [];
       this.voteCount = [];
       this.eventURL = '';
       this.eachVotes = [];
     },
-    enter: function(el){
+    enter(el){
       el.style.overflow = 'hidden';
       el.style.height = '0';
       nextFrame(() => {
         el.style.height = el.scrollHeight+'px';
       });
     },
-    leave: function(el){
+    leave(el){
       el.style.overflow = 'hidden';
       el.style.height = el.scrollHeight+'px';
       nextFrame(() => {
         el.style.height = '0';
       })
     },
-    afterEnter: function(el){
+    afterEnter(el){
       el.style.height = '';
       el.style.overflow = '';
     },
-    afterLeave: function(el){
+    afterLeave(el){
       el.style.height = '';
       el.style.overflow = '';
     }

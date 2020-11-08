@@ -26,11 +26,13 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import store from '../store';
 
+const LOADING_DELAY_TIME = 1000;
+
 export default {
   components: {
     Loading
   },
-  data: function(){
+  data(){
     return {
       title: '作成イベント一覧',
       explain: '特になし',
@@ -40,7 +42,7 @@ export default {
       isLoading: true
     }
   },
-  created: function() {
+  created() {
     this.getMyEventData();
   },
   beforeRouteEnter: (to, from, next) => {
@@ -62,19 +64,19 @@ export default {
     }
   },
   methods: {
-    getMyEventData: function(){ //イベントのデータを取得
+    getMyEventData(){ //イベントのデータを取得
       axios.post('/select_my_event_list',{
         twitterId: store.getters.user.twitterId
-      }).then(response=> {
+      }).then((response) => {
         this.eventData = response.data;
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
       }).catch((e) => {
         this.handleErrors({e : e, router : this.$router});
         setTimeout(() => {
           this.isLoading = false;
-        }, 1000);
+        }, LOADING_DELAY_TIME);
       });
     }
   }

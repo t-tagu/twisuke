@@ -31,17 +31,17 @@ import "firebase/auth";
 import Firebase from '../firebase';
 import store from '../store';
 
-let POPUP_CLOSED = 'ポップアップが閉じられました。';
-let AUTH_REJECTED = '認証を拒否しました。';
-let SERVICE_STOPPED = 'サービスの利用が停止されています。';
-let POPUP_BLOCKED = '認証ポップアップがブロックされました。ポップアップをブロックしている場合は解除して下さい。';
-let AUTH_DISABLED = '現在この認証方法はご利用頂けません。';
-let ERROR_OCCURED = 'エラーが発生しました。しばらく時間をおいてお試しください。';
-let NOT_VALID_ACCOUNT = '有効なアカウントではありません。';
-let POPUP_WIDTH = 600; //twitter認証のポップアップとリダイレクトの境界線
+const POPUP_CLOSED = 'ポップアップが閉じられました。';
+const AUTH_REJECTED = '認証を拒否しました。';
+const SERVICE_STOPPED = 'サービスの利用が停止されています。';
+const POPUP_BLOCKED = '認証ポップアップがブロックされました。ポップアップをブロックしている場合は解除して下さい。';
+const AUTH_DISABLED = '現在この認証方法はご利用頂けません。';
+const ERROR_OCCURED = 'エラーが発生しました。しばらく時間をおいてお試しください。';
+const NOT_VALID_ACCOUNT = '有効なアカウントではありません。';
+const POPUP_WIDTH = 600; //twitter認証のポップアップとリダイレクトの境界線
 
 export default {
-  data: function(){
+  data(){
     return{
       appName: 'ツイ助'
     }
@@ -53,37 +53,37 @@ export default {
       next();
     }
   },
-  mounted: function(){
+  mounted(){
     //リダイレクトしてログインをした場合、次にページが読み込まれた時に認証処理をおこなう
-    let that = this;
-    firebase.auth().getRedirectResult().then(function(result){
+    const that = this;
+    firebase.auth().getRedirectResult().then((result) => {
       if(result.user){
         that.firebaseTwitterAuthentication(result);
       }
-    }).catch(function(e){
+    }).catch((e) => {
       that.firebaseErrorMessage(e);
     });
   },
   methods: {
-    login: function(){
-      let provider = new firebase.auth.TwitterAuthProvider();
+    login(){
+      const provider = new firebase.auth.TwitterAuthProvider();
       if(window.innerWidth <= POPUP_WIDTH){
         firebase.auth().signInWithRedirect(provider);
       }else{
-        let that = this;
-        firebase.auth().signInWithPopup(provider).then(function(result) {
+        const that = this;
+        firebase.auth().signInWithPopup(provider).then((result) => {
           that.firebaseTwitterAuthentication(result);
-        }).catch(function(e) {
+        }).catch((e) => {
           that.firebaseErrorMessage(e);
         });
       }
     },
-    firebaseTwitterAuthentication: function(result){ //firebaseのtwitter認証の結果
+    firebaseTwitterAuthentication(result){ //firebaseのtwitter認証の結果
       let user = result.user;
       if(user){
-        let token = result.credential.accessToken;
-        let secret = result.credential.secret;
-        let twitterId = user.providerData[0].uid;
+        const token = result.credential.accessToken;
+        const secret = result.credential.secret;
+        const twitterId = user.providerData[0].uid;
         const userInfo = {
             'displayName': user.displayName,
             'photoURL': user.photoURL,
@@ -98,7 +98,7 @@ export default {
           twitterIdStr: twitterId,
           accessToken: token,
           accessTokenSecret: secret
-        }).then(response => {
+        }).then((response) => {
           if(store.getters.isSignedIn){
             this.$router.go('/schedule');
           }
@@ -109,7 +109,7 @@ export default {
         alert(NOT_VALID_ACCOUNT);
       }
     },
-    firebaseErrorMessage: function(e){
+    firebaseErrorMessage(e){
       switch(e.code) {
         case 'auth//cancelled-popup-request':
         case 'auth/popup-closed-by-user':

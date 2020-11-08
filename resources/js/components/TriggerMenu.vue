@@ -39,54 +39,55 @@ import { eventBus } from '../app';
 import store from '../store';
 import Firebase from '../firebase';
 
-let SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
+const SHOW_WIDTH = 980; //メニューの表示・非表示の境界線
 
-  export default {
-    data: function(){
-      return {
-        active: false,
-        isShow: false
+export default {
+  data(){
+    return {
+      active: false, //メニューの開閉の状態
+      isShow: false
+    }
+  },
+  computed: {
+    twitterId() {
+      return store.getters.user.twitterId;
+    },
+    displayName() {
+      return store.getters.user.displayName;
+    },
+    photoURL() {
+      return store.getters.user.photoURL;
+    },
+  },
+  created(){
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize()
+  },
+  mounted(){
+    //メニュー表示・非表示切り替え、TriggerMenuのtoggleをlisten
+    eventBus.$on('toggle', (active) => {
+      this.active = active;
+    });
+  },
+  destroyed(){
+    window.removeEventListener('resize', this.handleResize);
+  },
+  methods: {
+    clickLink(){
+      this.active = false;
+      eventBus.$emit('clickLink', false); //メニューのトリガーの状態をメニューの開閉に合わせるて伝える
+    },
+    handleResize(){
+      if(window.innerWidth <= SHOW_WIDTH){
+        this.isShow = true;
+      }else{
+        this.isShow = false;
       }
     },
-    computed: {
-      twitterId: function() {
-        return store.getters.user.twitterId;
-      },
-      displayName: function() {
-        return store.getters.user.displayName;
-      },
-      photoURL: function() {
-        return store.getters.user.photoURL;
-      },
-    },
-    created: function(){
-      window.addEventListener('resize', this.handleResize);
-      this.handleResize()
-    },
-    mounted: function(){
-      eventBus.$on('toggle', active => { //メニュー表示・非表示切り替え
-        this.active = active;
-      });
-    },
-    destroyed: function(){
-      window.removeEventListener('resize', this.handleResize);
-    },
-    methods: {
-      clickLink: function(){
-        this.active = false;
-        eventBus.$emit('clickLink', false);
-      },
-      handleResize: function(){
-        if(window.innerWidth <= SHOW_WIDTH){
-          this.isShow = true;
-        }else{
-          this.isShow = false;
-        }
-      },
-      logout: function(){
-        Firebase.logout();
-        this.$router.go('/login');
-      }
+    logout(){
+      Firebase.logout();
+      this.$router.go('/login');
     }
   }
+}
 </script>

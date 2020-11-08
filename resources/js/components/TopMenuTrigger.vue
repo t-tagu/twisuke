@@ -11,18 +11,18 @@
 import { eventBus } from '../app';
 
   export default {
-    data: function(){
+    data(){
       return {
         active: false
       }
     },
-    mounted: function() {
+    mounted() {
       eventBus.$on('clickTopMenuLink', active => { //メニュー非表示を受け取る
         this.active = active;
       });
     },
     methods: {
-      toggle: function(){
+      toggle(){
         this.active = !this.active;
         eventBus.$emit('toggleTopMenu', this.active);
       }

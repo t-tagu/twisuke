@@ -101,7 +101,7 @@
 
 export default {
   name: 'Top',
-  data: function(){
+  data(){
     return {
       appName: 'ツイ助'
     }

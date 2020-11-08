@@ -54,7 +54,9 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import store from '../store';
 
-let ENTER_EVENT_NAME = 'イベントの名前を入力して下さい。';
+const ENTER_EVENT_NAME = 'イベントの名前を入力して下さい。';
+const SHOW_CALENDAR_WIDTH = 600;
+const LOADING_DELAY_TIME = 1000;
 
 export default {
   components: {
@@ -62,10 +64,10 @@ export default {
     Loading
   },
   computed: {
-    nameCount: function() {
+    nameCount(){
       return this.name.length;
     },
-    explainCount: function() {
+    explainCount(){
       return this.explain.length;
     },
   },
@@ -76,17 +78,17 @@ export default {
       next('/login');
     }
   },
-  created: function(){
+  created(){
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000);
+    }, LOADING_DELAY_TIME);
   },
-  destroyed: function(){
+  destroyed(){
     window.removeEventListener('resize', this.handleResize);
   },
-  data: function(){
+  data(){
     return {
       title: 'イベント作成',
       name: '',
@@ -111,10 +113,10 @@ export default {
     }
   },
   methods: {
-    makeEvent: function(){ //イベントのデータをDBに登録
+    makeEvent(){ //イベントのデータをDBに登録
 
-      let eventName = this.name;
-      let explain = this.explain;
+      const eventName = this.name;
+      const explain = this.explain;
 
       if(!eventName){
         alert(ENTER_EVENT_NAME);
@@ -143,23 +145,23 @@ export default {
       formData.append('candidateDate',JSON.stringify((this.candidateDate.trim()).split(/\n/)));
 
       axios.post('/make_event',formData,{
-      }).then(response => {
+      }).then((response) => {
         this.$router.push({name:'share', params: { event_id: response.data.eventId }});
       }).catch((e) => {
         this.handleErrors({e : e, router : this.$router});
       });
     },
-    formatDate: function(value){ //日付けのフォーマットを揃える
+    formatDate(value){ //日付けのフォーマットを揃える
       return moment(value).format('YYYY/MM/DD 19:00');
     },
-    selected: function(){
+    selected(){
       this.candidateDate += this.formatDate(this.selectedDate)+'\n';
     },
-    showAndHide: function(){
+    showAndHide(){
       this.isCalendarShow = !this.isCalendarShow;
     },
-    handleResize: function(){
-      if(window.innerWidth >= 600){
+    handleResize(){
+      if(window.innerWidth >= SHOW_CALENDAR_WIDTH){
         this.isCalendarShow = true;
       }
     }

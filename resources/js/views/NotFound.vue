@@ -23,7 +23,7 @@
 <script>
 
 export default {
-  data: function(){
+  data(){
     return {
       mainTitle: "404",
       subTitle: "Not Found",

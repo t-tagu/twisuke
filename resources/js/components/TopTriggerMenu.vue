@@ -18,52 +18,52 @@
 <script>
 import { eventBus } from '../app';
 
-let SHOW_WIDTH = 980; //メニューの表示・非表示の切り替え
-let OFFSET_BORDER = 720; //スクロールオフセットの切り替え
+const SHOW_WIDTH = 980; //メニューの表示・非表示の切り替え
+const OFFSET_BORDER = 720; //スクロールオフセットの切り替え
 
-  export default {
-    data: function(){
-      return {
-        appName: 'ツイ助とは',
-        funcIntroduction: '機能紹介',
-        active: false,
-        isShow: false,
-        scrollDuration: 1000,
-        offset80: -80,
-        offset60: -60,
-        isOffset80: true
+export default {
+  data(){
+    return {
+      appName: 'ツイ助とは',
+      funcIntroduction: '機能紹介',
+      active: false,
+      isShow: false,
+      scrollDuration: 1000,
+      offset80: -80,
+      offset60: -60,
+      isOffset80: true
+    }
+  },
+  created(){
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  mounted(){
+    eventBus.$on("toggleTopMenu", (active) => { //メニュー表示・非表示切り替え
+      this.active = active;
+    });
+  },
+  destroyed(){
+    window.removeEventListener('resize', this.handleResize);
+  },
+  methods: {
+    clickTopMenuLink(){ //メニュー閉じる
+      this.active = false;
+      eventBus.$emit('clickTopMenuLink', false);
+    },
+    handleResize(){
+      if(window.innerWidth <= SHOW_WIDTH){
+        this.isShow = true;
+      }else{
+        this.isShow = false;
       }
-    },
-    created: function(){
-      window.addEventListener('resize', this.handleResize);
-      this.handleResize();
-    },
-    mounted: function(){
-      eventBus.$on("toggleTopMenu", active => { //メニュー表示・非表示切り替え
-        this.active = active;
-      });
-    },
-    destroyed: function(){
-      window.removeEventListener('resize', this.handleResize);
-    },
-    methods: {
-      clickTopMenuLink: function(){ //メニュー閉じる
-        this.active = false;
-        eventBus.$emit('clickTopMenuLink', false);
-      },
-      handleResize: function(){
-        if(window.innerWidth <= SHOW_WIDTH){
-          this.isShow = true;
-        }else{
-          this.isShow = false;
-        }
 
-        if(window.innerWidth <= OFFSET_BORDER){
-          this.isOffset80 = false;
-        }else{
-          this.isOffset80 = true;
-        }
+      if(window.innerWidth <= OFFSET_BORDER){
+        this.isOffset80 = false;
+      }else{
+        this.isOffset80 = true;
       }
     }
   }
+}
 </script>
