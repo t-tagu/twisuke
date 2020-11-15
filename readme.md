@@ -20,16 +20,16 @@
 Vue.js<br>
 Laravel 5.8<br>
 SASS<br>
-javascript<br>
-PHP<br>
 HTML5<br>
 CSS3<br>
+JavaScript<br>
+PHP<br>
 WEBPACK<br>
 Gulp<br>
            
 # 機能的特徴
 
-* SPAで作成<br>
+* シングルページアプリケーション<br>
 * Vuexによるログイン状態管理<br>
 * レスポンシブ対応<br>
 * ツイッターアカウントログイン<br>
