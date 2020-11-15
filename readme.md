@@ -12,28 +12,15 @@
 ツイッターの相互フォロワー間のスケジュール調整を効率的におこなうサービスです。<br>
 イベント作成からDMでのスケジュール調整URLの共有までをまとめて完了することができます。<br>
 
-サイトURL : https://twisuke.herokuapp.com/
+サイトURL : https://portfoliotagu.xyz/
 
 
-# 使用フレームワークや言語、ツールなど
+# 使用フ言語など
 
-Vue.js<br>
-Laravel 5.8<br>
-SASS<br>
 HTML5<br>
 CSS3<br>
 JavaScript<br>
 PHP<br>
-WEBPACK<br>
-Gulp<br>
-           
-# 機能的特徴
-
-* シングルページアプリケーション<br>
-* Vuexによるログイン状態管理<br>
-* レスポンシブ対応<br>
-* ツイッターアカウントログイン<br>
-* TwitterAPIによるDM送信機能<br>
 
 # 作成者
 
